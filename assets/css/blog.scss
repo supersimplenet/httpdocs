@@ -284,19 +284,29 @@ footer {
 .blog-index {
   main {
     ul {
-      list-style-type: none;
       padding-left: 0;
+    }
+
+    li {
+      list-style-type: none;
       font-size: 1.25rem;
 
+      @media (min-width: 415px) {
+        position: relative;
+        padding-left: 5em;
+      }
+
+      date {
+        display: block;
+
+        @media (min-width: 415px) {
+          position: absolute;
+          left: 0;
+        }
+      }
+
       a {
-        //text-decoration: none;
         font-weight: 600;
-        margin-left: .25em;
-
-
-        //&:hover {
-        //  text-decoration: underline;
-        //}
       }
     }
   }
