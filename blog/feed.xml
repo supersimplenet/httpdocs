@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<rss version="2.0">
+    <channel>
+        <title>super-simple.net blog</title>
+        <link>https://super-simple.net/blog</link>
+        <description>web front-end development: html, css, js ...</description>
+        <image>
+            <url>https://pbs.twimg.com/profile_images/1121464463415291907/v-xiWeLi_400x400.png</url>
+        </image>
+        <item>
+            <title>Cross-browser flexbox input add-ons</title>
+            <link>https://super-simple.net/blog/cross-browser-flexbox-input-add-ons/</link>
+            <description>Basado en Solvey by Flexbox: Input Add-ons, dando soporte a un mayor número de los navegadores más usados, según caniuse.com</description>
+        </item>
+    </channel>
+</rss>
