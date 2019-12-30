@@ -13,8 +13,7 @@
             <title>fieldset no puede ser flexbox container</title>
             <link>https://super-simple.net/blog/fieldset-no-puede-ser-flexbox-container/</link>
             <description>Recientemente, me he encontrado intentando maquetar un formulario con dos input, que: Deben tener una anchura mínima (en este caso 120 píxeles). Si es posible, ambos deberán ir en la misma línea. Si no, irá cada uno en una línea propia. En todo caso deberán crecer para ocupar todo el espacio horizontal disponibile.</description>
-            <content:encoded><![CDATA[
-            <p>Recientemente, me he encontrado intentando maquetar un formulario con dos <code>input</code>, que:</p>
+            <content:encoded><![CDATA[<p>Recientemente, me he encontrado intentando maquetar un formulario con dos <code>input</code>, que:</p>
 
 	<ol>
 		<li>Deben tener una anchura mínima (en este caso 120 píxeles).</li>
@@ -81,15 +80,13 @@ input {
 </pre>
 	</div>
 
-	<p><a href="/blog/">+ VER MÁS ARTÍCULOS</a></p>
-            ]]></content:encoded>
+	<p><a href="/blog/">+ VER MÁS ARTÍCULOS</a></p>]]></content:encoded>
         </item>
         <item>
             <title>Cross-browser flexbox input add-ons</title>
             <link>https://super-simple.net/blog/cross-browser-flexbox-input-add-ons/</link>
             <description>Basado en Solvey by Flexbox: Input Add-ons, dando soporte a un mayor número de los navegadores más usados, según caniuse.com</description>
-            <content:encoded><![CDATA[
-            <p>Basado en <a href="https://philipwalton.github.io/solved-by-flexbox/demos/input-add-ons/">Solvey by Flexbox: Input Add-ons</a>, dando soporte a un mayor número de los navegadores más usados, según <a href="http://caniuse.com/#feat=flexbox">caniuse.com</a></p>
+            <content:encoded><![CDATA[<p>Basado en <a href="https://philipwalton.github.io/solved-by-flexbox/demos/input-add-ons/">Solvey by Flexbox: Input Add-ons</a>, dando soporte a un mayor número de los navegadores más usados, según <a href="http://caniuse.com/#feat=flexbox">caniuse.com</a></p>
 
   <img src="img/caniuse.png" alt="">
 
@@ -196,8 +193,7 @@ input {
 		</li>
 	</ul>
 
-	<p><a href="/blog/">+ VER MÁS ARTÍCULOS</a></p>
-            ]]></content:encoded>
+	<p><a href="/blog/">+ VER MÁS ARTÍCULOS</a></p>]]></content:encoded>
         </item>
     </channel>
 </rss>
