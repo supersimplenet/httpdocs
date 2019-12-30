@@ -1,11 +1,13 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
     <channel>
         <title>super-simple.net blog</title>
         <link>https://super-simple.net/blog</link>
         <description>web front-end development: html, css, js ...</description>
         <image>
+            <title>SuperSimple</title>
             <url>https://pbs.twimg.com/profile_images/1121464463415291907/v-xiWeLi_400x400.png</url>
+            <link>https://super-simple.net/blog</link>
         </image>
         <item>
             <title>Cross-browser flexbox input add-ons</title>
