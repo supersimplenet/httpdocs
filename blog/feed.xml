@@ -13,11 +13,191 @@
             <title>fieldset no puede ser flexbox container</title>
             <link>https://super-simple.net/blog/fieldset-no-puede-ser-flexbox-container/</link>
             <description>Recientemente, me he encontrado intentando maquetar un formulario con dos input, que: Deben tener una anchura mínima (en este caso 120 píxeles). Si es posible, ambos deberán ir en la misma línea. Si no, irá cada uno en una línea propia. En todo caso deberán crecer para ocupar todo el espacio horizontal disponibile.</description>
+            <content:encoded><![CDATA[
+            <p>Recientemente, me he encontrado intentando maquetar un formulario con dos <code>input</code>, que:</p>
+
+	<ol>
+		<li>Deben tener una anchura mínima (en este caso 120 píxeles).</li>
+		<li>Si es posible, ambos deberán ir en la misma línea. Si no, irá cada uno en una línea propia.</li>
+		<li>En todo caso deberán crecer para ocupar todo el espacio horizontal disponibile.</li>
+	</ol>
+
+	<p>Un caso sencillo, usando <code>flex-wrap</code> y <code>flex-grow</code>, ¿verdad?:</p>
+
+	<p>Sin embargo, verás que la demo no funciona como se espera, si la ves desde uno de estos navegadores:</p>
+
+	<ul>
+		<li><img src="/assets/img/browser-logos/chrome.svg"> <b>Chrome</b></li>
+		<li><img src="/assets/img/browser-logos/edge.svg"> <b>Edge</b></li>
+		<li><img src="/assets/img/browser-logos/samsung.svg"> <b>Samsung Internet</b></li>
+		<li><img src="/assets/img/browser-logos/uc.svg"> <b>UC Browser</b></li>
+	</ul>
+
+	<div class="codepen" data-prefill data-default-tab="result,css" data-height="280">
+<pre data-lang="html">
+&lt;fieldset>
+	&lt;input type="text">
+	&lt;input type="text">
+&lt;/fieldset>
+</pre>
+		<pre data-lang="less">
+fieldset {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+input {
+	width: 120px;
+	flex-grow: 1;
+}
+</pre>
+	</div>
+
+	<p>Desgraciadamente, hay ciertos elementos, entre ellos <code>fieldset</code>, en los que <code>display:flex</code> no se aplica correctamente.</p>
+
+	<p><b>Solución:</b> tan simple como añadir un elemento extra, que utilizaremos como contenedor <i>flexbox:</i></p>
+
+	<div class="codepen" data-prefill data-default-tab="result,css" data-height="300">
+<pre data-lang="html">
+&lt;fieldset>
+	&lt;div class="input-group">
+		&lt;input type="text">
+		&lt;input type="text">
+	&lt;/div>
+&lt;/fieldset>
+</pre>
+<pre data-lang="less">
+fieldset {}
+
+.input-group {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+input {
+	width: 120px;
+	flex-grow: 1;
+}
+</pre>
+	</div>
+
+	<p><a href="/blog/">+ VER MÁS ARTÍCULOS</a></p>
+            ]]></content:encoded>
         </item>
         <item>
             <title>Cross-browser flexbox input add-ons</title>
             <link>https://super-simple.net/blog/cross-browser-flexbox-input-add-ons/</link>
             <description>Basado en Solvey by Flexbox: Input Add-ons, dando soporte a un mayor número de los navegadores más usados, según caniuse.com</description>
+            <content:encoded><![CDATA[
+            <p>Basado en <a href="https://philipwalton.github.io/solved-by-flexbox/demos/input-add-ons/">Solvey by Flexbox: Input Add-ons</a>, dando soporte a un mayor número de los navegadores más usados, según <a href="http://caniuse.com/#feat=flexbox">caniuse.com</a></p>
+
+  <img src="img/caniuse.png" alt="">
+
+	<p>Dado el marcado:</p>
+
+	<div class="codepen" data-prefill data-default-tab="html" data-height="200">
+		<pre data-lang="html">
+&lt;div class="InputAddOn"&gt;
+  &lt;button&gt;-&lt;/button&gt;
+  &lt;input class="InputAddOn-field" type="number" value="1"&gt;
+  &lt;button&gt;+&lt;/button&gt;
+&lt;/div&gt;</pre>
+	</div>
+
+  <p>Aplicamos las variantes de <code>display:flex</code> con los prefijos de navegadores correspondientes:</p>
+
+	<p>
+		Además, como <b>UC Browser</b> y <b>Android Browser <=4.3</b> no lo aplican correctamente a elementos <code>inline</code>, aplicamos <code>display:block</code>
+	</p>
+
+	<div class="codepen" data-prefill data-default-tab="css,result" data-height="410">
+		<pre data-lang="html">
+&lt;div class="InputAddOn"&gt;
+  &lt;button&gt;-&lt;/button&gt;
+  &lt;input class="InputAddOn-field" type="number" value="1"&gt;
+  &lt;button&gt;+&lt;/button&gt;
+&lt;/div&gt;</pre>
+		<pre data-lang="less">
+.InputAddOn {
+	display: block;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.InputAddOn-field {
+	display: block;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}</pre>
+	</div>
+
+	<h2 class="browser-logo">
+		<img src="/assets/img/browser-logos/internet-explorer.svg">
+		Internet Explorer 8 y 9
+	</h2>
+
+  <p>Estos navegadores no soportan <code>display:flexbox</code>, pero podemos hacer uso de <code>display:table</code> y <code>display:table-cell</code> para obtener un resultado similar. Hacemos uso de <a href="https://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">comentarios condicionales</a>.</p>
+
+	<div class="codepen" data-prefill data-default-tab="html,css" data-height="330">
+<pre data-lang="html">
+&lt;!--[if IE 8 ]&gt;&lt;html class="ie8 lte-ie9 lte-ie8"&gt;&lt;![endif]--&gt;
+&lt;!--[if IE 9 ]&gt;&lt;html class="ie9 lte-ie9"&gt;&lt;![endif]--></pre>
+<pre data-lang="css">
+.lte-ie9 .InputAddOn {
+    display: table;
+    width: 100%;
+}
+
+.lte-ie9 .InputAddOn > * {
+    display: table-cell;
+}
+
+.lte-ie9 .InputAddOn-field {
+    width: 100%;
+}</pre>
+	</div>
+
+	<p>Probado en:</p>
+
+	<ul>
+		<li>
+			<img src="/assets/img/browser-logos/internet-explorer.svg" alt="">
+			<b>Internet Explorer 8, 9, 10, 11</b>
+		</li>
+		<li>
+			<img src="/assets/img/browser-logos/edge.svg" alt="">
+			<b>Edge</b>
+		</li>
+		<li>
+			<img src="/assets/img/browser-logos/firefox.svg" alt="">
+			<b>Firefox</b>
+		</li>
+		<li>
+			<img src="/assets/img/browser-logos/chrome.svg" alt="">
+			<b>Chrome</b>
+		</li>
+		<li>
+			<img src="/assets/img/browser-logos/safari.svg" alt="">
+			<b>Safari</b>
+		</li>
+		<li>
+			<img src="/assets/img/browser-logos/opera.svg" alt="">
+			<b>Opera</b>
+		</li>
+		<li>
+			<img src="/assets/img/browser-logos/uc.svg" alt="">
+			<b>UC browser</b>
+		</li>
+	</ul>
+
+	<p><a href="/blog/">+ VER MÁS ARTÍCULOS</a></p>
+            ]]></content:encoded>
         </item>
     </channel>
 </rss>
