@@ -5,10 +5,15 @@
         <link>https://super-simple.net/blog</link>
         <description>web front-end development: html, css, js ...</description>
         <image>
-            <title>SuperSimple</title>
+            <title>super-simple.net blog</title>
             <url>https://pbs.twimg.com/profile_images/1121464463415291907/v-xiWeLi_400x400.png</url>
             <link>https://super-simple.net/blog</link>
         </image>
+        <item>
+            <title>fieldset no puede ser flexbox container</title>
+            <link>https://super-simple.net/blog/fieldset-no-puede-ser-flexbox-container/</link>
+            <description>Recientemente, me he encontrado intentando maquetar un formulario con dos input, que: Deben tener una anchura mínima (en este caso 120 píxeles). Si es posible, ambos deberán ir en la misma línea. Si no, irá cada uno en una línea propia. En todo caso deberán crecer para ocupar todo el espacio horizontal disponibile.</description>
+        </item>
         <item>
             <title>Cross-browser flexbox input add-ons</title>
             <link>https://super-simple.net/blog/cross-browser-flexbox-input-add-ons/</link>
