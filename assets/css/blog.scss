@@ -58,9 +58,10 @@ p {
 
 pre {
   background: #eee;
-  padding: 1em;
+  padding: 0 1em;
   font-family: inherit;
   font-weight: 200;
+  overflow-y: auto;
 }
 
 b {

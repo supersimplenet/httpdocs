@@ -1,0 +1,343 @@
+<!doctype html>
+<html class="blog-post" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Un CSS Reset moderno - SuperSimple</title>
+		<style>img { max-width: 100% } svg, img[src*='svg'] { height: 1em }</style>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:300|Source+Sans+Pro:200,300,600,900">
+		<link rel="stylesheet" href="/assets/css/blog.css">
+</head>
+<body>
+<header>
+    <a href="/blog" class="logo"><b>Super</b>Simple</a>
+
+    <nav class="share">
+        <a href="https://twitter.com/supersimplenet" title="Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+	            <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/>
+            </svg>
+        </a>
+    </nav>
+</header>
+
+<main>
+  <date>2020/04/13</date>
+
+  <h1>Un CSS Reset moderno</h1>
+
+	<p>
+		Traducción de <a href="https://hankchizljaw.com/wrote/a-modern-css-reset/">A Modern CSS Reset</a>,
+		por <a href="https://twitter.com/hankchizljaw">Andy Bell</a>.
+	</p>
+
+	<p>
+		Pienso y disfruto sobre asuntos de CSS muy aburridos, probablemente mucho más de lo que debería, para ser honesto.
+		Una de las cosas en la que probablemente he pasado demasiado tiempo pensando a lo largo de los años, es en los
+		<a href="https://es.wikipedia.org/wiki/Reset_CSS">CSS resets</a>.
+	</p>
+
+	<p>
+		En esta época moderna del desarrollo web, realmente no necesitamos un reset tan fuerte, o incluso ningún reset en absoluto,
+		ya que las incompatibilidades CSS de los navegadores son mucho menos comunes de lo que lo era en los viejos tiempos de IE6.
+		Aquella época, en la que resets como <a href="https://github.com/necolas/normalize.css/">normalize.css</a> surgieron y
+		nos salvaron de aquel infierno. Esos días quedaron atrás y podemos confiar en que nuestros navegadores tegan un mejor
+		comportamiento, por lo que creo que resets como aquellos son, probablemente, redundantes en su mayoría.
+	</p>
+
+	<h2>Un reset de valores predeterminados razonables</h2>
+
+	<p>
+		Me sigue gustando aplicar un reset, así que he estado retocando un CSS reset propio, a lo largo de los años,
+		de manera obsesiva. Voy a explicar qué contiene y por qué, pero antes e hacerlo, aquí está en su totalidad:
+	</p>
+
+	<pre><code>
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default padding */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Natural flow and rhythm in articles by default */
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+	</code></pre>
+
+	<h2>Descomponiéndolo por partes</h2>
+
+	<p>
+		Empezamos con box-sizing. Simplemente reinicio todos los elementos y pseudo-elementos para que usen
+		<code>box-sizing: border-box</code>.
+	</p>
+
+	<pre><code>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+	</code></pre>
+
+	<p>
+		Algunas personas piensan que los pseudo-elementos deberían heredar el box-sizing, pero creo que es absurdo.
+		Si quieres utilizar un <a href="https://css-tricks.com/almanac/properties/b/box-sizing/">valor diferente de box-sizing</a>,
+		configúralo explícitamente—almenos es lo que yo hago. Escribí más acerca de box-sizing en
+		<a href="https://cssfromscratch.com/posts/bite-sized-basics-box-sizing/">CSS From Scratch</a>.
+	</p>
+
+	<pre><code>
+/* Remove default padding */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+	</code></pre>
+
+	<p>
+		Tras box-sizing, hago un reinicio general de <code>margin</code> y <code>padding</code>, de los estilos por defecto del
+		navegador. Esto es bastante auto-explicativo, así que no profundizaré en ello demasiado.
+	</p>
+
+	<p>
+		Sin embargo, mencionaré un caso particular con los listados. Selecciono sólo los listados que tengan un atributo
+		<code>class</code> porque si se usa un simple <code>&lt;ul&gt;</code> o <code>&lt;ol&gt;</code>, quiero que tengan estilos  vean como
+		de listado. Muchos resets, incluyendo previos míos, eliminan estos estilos de manera agresiva.
+	</p>
+
+	<pre><code>
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+	</code></pre>
+
+	<p>
+		A continuación: los estilos de <code>&lt;body&gt;</code>. Mantengo esto realmente simple. Es útil que el <code>&lt;body&gt;</code>
+		ocupe todo el alto de la ventana, aunque esté vacío, lo que hago estableciendo <code>min-height</code> a <code>100vh</code>.
+		También me gusta que el scroll sea fluido, así también que utilizo <code>scroll-behaviour: smooth</code>.
+	</p>
+
+	<p>
+		Sólo quiero establecer dos estilos de texto. Establezco <code>line-height</code> a <code>1.5</code> porque el valor por
+		defecto <code>1.2</code> no es suficiente para obtener un texto legible y accesible. También establezco
+		<code>text-rendering</code> a <code>optimizeSpeed</code>. Usar <code>optimizeLegibility</code> hace que el texto se vea
+		más bonito, pero tiene serios problemas de rendimiento, como
+		<a href="https://marco.org/2012/11/15/text-rendering-optimize-legibility">retrasos de carga de 30 segundos</a>, por lo que
+		trato de evitarlo. Sin embargo, a veces lo añado a secciones con poco texto.
+	</p>
+
+	<pre><code>
+ul[class],
+ol[class] {
+  list-style: none;
+}
+	</code></pre>
+
+	<p>
+		Tal como en las reglas para <code>margin</code> y <code>padding</code>, tan sólo reinicio <code>list-style</code> si el
+		listado tiene un atributo <code>class</code>.
+	</p>
+
+	<pre><code>
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+	</code></pre>
+
+	<p>
+		Para los enlaces que tengan atributo <code>class</code>, establezco <code>text-decoration-skip-ink: auto</code> para que
+		el subrayado se renderize de un modo mucho más legible. Esto podría establecerse en los enlaces a nivel global, pero me ha
+		causado varios conflictos en el pasado, por lo que lo mantengo así.
+	</p>
+
+	<pre><code>
+img {
+  max-width: 100%;
+  display: block;
+}
+	</code></pre>
+
+	<p>
+		A continuación viene las imágenes fluidas. Establezco las imágenes para que sean un elemento en bloque porque, francamente,
+		la vida es demasiado corta para ese margen extraño que aparece debajo. Además, las imágenes—especialmente en mi trabajo—suelen
+		comportarse como bloques.
+	</p>
+
+	<pre><code>
+article > * + * {
+  margin-top: 1em;
+}
+	</code></pre>
+
+	<p>
+		Me encanta este truco de CSS y por fín he sido tan valiente como para incluirlo en el reset.
+		<a href="https://alistapart.com/article/axiomatic-css-and-lobotomized-owls/">El selector del buho lobotomizado</a> apunta
+		a los descendientes directos de un artículo y les añade <code>1em</code> de margen superior. Esto le da un ritmo sólido al
+		flujo de contenido. En realidad, ahora uso una utilidad <code>.flow</code> en cada proyecto. Puedes
+		<a href="https://24ways.org/2018/managing-flow-and-rhythm-with-css-custom-properties/">leer más al respecto en 24 ways</a>.
+		De hecho, reconozco que es el CSS que más uso hoy en día.
+	</p>
+
+	<pre><code>
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+	</code></pre>
+
+	<p>
+		Otra cosa que por fin he sido tan valiente como para incluirla por defecto es <code>font: inherit</code> en campos de
+		formulario, que hace exactamente lo que explica <a href="https://css-tricks.com/almanac/properties/f/font/">este artículo</a>.
+		¡No más texto minúsculo!
+	</p>
+
+	<pre><code>
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+	</code></pre>
+
+	<p>
+		Por último, pero no menos importante, un <code>@media query</code> que reinicia animaciones, transiciones y comportamiento
+		de scroll si
+		<a href="https://css-tricks.com/introduction-reduced-motion-media-query/">el usuario prefiere un movimiento reducido</a>.
+		Me gusta tener esto en el reset, con <code>!important</code>, porque si un usuario no quiere movimiento, no lo querrá sin
+		importar el CSS que pueda haber tras este reset.
+	</p>
+
+	<p>
+		<b>Actualización:</b> Gracias a <a href="https://github.com/atomiks">@atomiks</a>, esto
+		<a href="https://github.com/hankchizljaw/modern-css-reset/pull/6">ha sido actualizado</a> de manera que no rompe los
+		eventos de JavaScript que observan <code>animationend</code> y <code>transitionend</code>.
+	</p>
+
+	<h2>Para terminar</h2>
+
+	<p>
+		En conclusión, un reset minúsculo que hace mi vida mucho más facil. Si te gusta, ¡también puedes usarlo! Puedes encontrarlo
+		en <a href="https://github.com/hankchizljaw/modern-css-reset">GitHub</a> o
+		<a href="https://www.npmjs.com/package/modern-css-reset">NPM</a>.
+	</p>
+
+
+
+
+
+
+	<p><a href="/blog/">+ VER MÁS ARTÍCULOS</a></p>
+</main>
+
+<footer>
+  Créditos:
+	<a href="https://fontawesome.com">Font Awesome</a>
+</footer>
+
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140463028-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-140463028-1');
+</script>
+</body>
+</html>
+-->
