@@ -1,0 +1,128 @@
+<!doctype html>
+<html class="blog-post" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>calc-line-height</title>
+</head>
+<body>
+
+<h1>Using <i>calc</i> to figure out optimal <i>line-height</i></h1>
+
+<p>Although we can apply any <a href="https://www.w3schools.com/cssref/css_units.asp">CSS Unit</a> to <code>line-height</code>, a <a href="https://css-tricks.com/almanac/properties/l/line-height/#article-header-id-0">unitless</a> <b>1.5</b> value is the most recommended way to handle it.</p>
+
+<p>To begin with, an explanatory image on how <code>line-height</code> is applied by the browser:</p>
+
+<img src="line-height.png" alt="line-height explanatory image">
+
+<p>As you can see, every <b>line-height</b> is distributed in different areas:</p>
+
+<ol>
+	<li>A <b>content</b> area, that would be <b>≈1</b> tall.</li>
+	<li>A <b>leading</b> area, that would be the remaining space, halved in <b>top</b> & <b>bottom</b> leadings.</b></li>
+</ol>
+
+<p>Therefore we could express it as:</p>
+
+<p><i>lineHeight = (leading / 2) + content + (leading / 2)</i></p>
+
+<p>Or: <code>line-height: calc(0.25 + 1 + 0.25)</code></p>
+
+<p>However, this approach has a maitenance downside: as you can note in following demo, it sets too much line height in larger font sizes. In order to establish an optimal readability, we must <b>manually tweak it on every <code>font-size</code> increment</b>, down to <b>1.1</b> on very large font sizes.</p>
+
+<p>
+	<a href="https://codepen.io/supersimplenet/pen/RwWyjKV">
+		https://codepen.io/supersimplenet/pen/RwWyjKV
+	</a>
+</p>
+
+<h2>Looking for a formula for always optimal line height:</h2>
+
+<p>To have a clearer way, let's take a look to our demo figures, on a comparison table (computed <code>line-height</code> values are in pixels for easier understanding):</p>
+
+<table>
+	<thead>
+	<tr>
+		<th></th>
+		<th>line-height: 1.5</th>
+		<th>line-height: 1.1</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<th>font-size: 10px</th>
+		<td>15px</td>
+		<td><del>11px</del></td>
+	</tr>
+	<tr>
+		<th>font-size: 50px</th>
+		<td><del>75px</del></td>
+		<td>55px</td>
+	</tr>
+	</tbody>
+</table>
+
+<p>In order get an optimal <code>line-height</code> we will need to be as close as possible to <b>1.5</b> value (15px), on smaller font sizes, but closer to <b>1.1</b> (55px) on larger ones.</p>
+
+<p>Wait ... 11px is <i>already</i> pretty close to 15px. We're just a few pixels away.</p>
+
+<p>So, instead of starting on a <b>1.5</b> value, why don't we flip it over? We could start down from <b>1.1</b>, adding just the few pixels we need, which will make almost no visual difference in larger font sizes, but on smaller ones.</p>
+
+<p>Something like: <code>line-height: calc(2px + 1.1 + 2px)</code></p>
+
+<p>Revisiting our computed <code>line-height</code> comparison table:</p>
+
+<table>
+	<thead>
+	<tr>
+		<th></th>
+		<th>line-height: 1.5</th>
+		<th>line-height: calc(2px + 1.1 + 2px)</th>
+		<th>line-height: 1.1</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<th>font-size: 10px</th>
+		<td>15px</td>
+		<td>15px</td>
+		<td><del>11px</del></td>
+	</tr>
+	<tr>
+		<th>font-size: 50px</th>
+		<td><del>75px</del></td>
+		<td>59px</td>
+		<td>55px</td>
+	</tr>
+	</tbody>
+</table>
+
+<p>That's better! We nailed it in small font sizes, and get pretty close on larger ones.</p>
+
+<p>Unfortunately, <code>line-height: calc(2px + 1.1 + 2px)</code> is invalid CSS, since unit & unitless values can't be mixed. Could we use any relative unit that gets computed to about <b>1.1</b>? </p>
+
+<p>Kind of: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length#ex">ex</a> unit computes to current font x-height (lowercase x letter height), so we just find out the perfect match for our formula. </p>
+
+<p>Since every typeface has its own <b>ex</b> value, we still need to fine-tuning our <b>px</b> & <b>ex</b> values. Anyway, consider this a good starting point:</p>
+
+<p><code>line-height: calc(2px + 2ex + 2px)</code></p>
+
+<p>As you can see in following demo, it sets a very nice line height, in a wide range of different typefaces:</p>
+
+<p>
+	<a href="https://codepen.io/supersimplenet/pen/vYNjaem">
+		https://codepen.io/supersimplenet/pen/vYNjaem
+	</a>
+</p>
+
+<p>That's valid CSS. Also, <a href="https://caniuse.com/#feat=mdn-css_types_length_ex">ex unit has very good browser support</a>. Hooray!</p>
+
+<h2>A final note on responsive typography:</h2>
+
+<p>Our formula also helps with <a href="https://www.madebymike.com.au/writing/precise-control-responsive-typography/">reponsive typography</a>. Using relative-to-viewport units <i>(vw, vh, vmin, vmax)</i> leads to a lack of fine control, so we can't tweak <code>line-height</code> on every <code>font-size</code> change.
+</p>
+
+<p>This issue was also tackled by <a href="https://fvsch.com/css-locks//">CSS locks</a> technique, which uses relatively complex arithmetic to establish a minimum and maximum <code>line-height</code>.</p>
+</body>
+</html>
