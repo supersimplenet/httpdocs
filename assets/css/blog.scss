@@ -62,6 +62,24 @@ pre {
   font-family: inherit;
   font-weight: 200;
   overflow-y: auto;
+  tab-size: 1em;
+
+  &[data-code] {
+    position: relative;
+
+    &:after {
+      content: attr(data-code);
+      text-transform: uppercase;
+      background-color: #ddd;
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-weight: bold;
+      font-size: .75em;
+      padding: .25em;
+      line-height: 1;
+    }
+  }
 }
 
 b {
@@ -123,8 +141,12 @@ header {
   }
 }
 
-
-
+hr {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
 
 .logo {
   text-transform: uppercase;
@@ -197,6 +219,9 @@ $vertical-rhythm: 1rem;
 
 .blog-post {
   main {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+
     li + li {
       margin-top: $vertical-rhythm / 2;
     }
@@ -208,6 +233,10 @@ main {
   @include container();
   @include vertical-rhythm();
   flex-grow: 1;
+
+  hr {
+    margin-top: 1.5rem;
+  }
 }
 
 date {
@@ -262,15 +291,13 @@ ol {
 
     &:before {
       content: counter(ol-counter)'.';
-      margin-right: .75em;
       font-weight: 600;
     }
   }
 }
 
 ul {
-  list-style-position: inside;
-  padding-left: 1.5rem;
+  padding-left: 2.5rem;
 
   li {
 
