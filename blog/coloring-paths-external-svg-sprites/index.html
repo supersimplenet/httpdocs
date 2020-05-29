@@ -1,0 +1,222 @@
+<!doctype html>
+<html class="blog-post" lang="es">
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SuperSimple</title>
+	<style>img { max-width: 100% } svg, img[src*='svg'] { height: 1em }</style>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:300|Source+Sans+Pro:200,300,600,900">
+	<link rel="stylesheet" href="/assets/css/blog.css">
+
+	<style>
+		main svg {
+			width: 1em;
+			font-size: 2em;
+		}
+
+		#svg-inline-truck_body,
+		.svg-external-truck [fill="var(--color-truck_body)"] {
+			fill: red;
+		}
+
+		#svg-inline-truck_cab,
+		.svg-external-truck [fill="var(--color-truck_cab)"] {
+			fill: orange;
+		}
+
+		#svg-inline-truck_wheels,
+		.svg-external-truck [fill="var(--color-truck_wheels)"] {
+			fill: blue;
+		}
+
+		.svg-external-truck {
+			--color-truck_body: red;
+			--color-truck_cab: orange;
+			--color-truck_wheels: blue;
+		}
+	</style>
+</head>
+<body>
+<header>
+    <a href="/blog" class="logo"><b>Super</b>Simple</a>
+
+    <nav class="share">
+        <a href="https://twitter.com/supersimplenet" title="Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+        </a>
+    </nav>
+</header>
+
+<main>
+  <date>2020/05/28</date>
+
+  <h1>Coloring paths on external svg sprites</h1>
+
+	<p>
+		When using an <i>inline</i> svg sprite, besides applying a color it with <code>fill</code> property, we can set <b>a different color for each path</b>:
+	</p>
+
+	<svg class="svg-inline">
+		<use xlink:href="#svg-inline-truck"></use>
+	</svg>
+
+	<pre data-code="html"><code>
+&lt;svg ... >
+	&lt;symbol id="svg-inline-truck" ... >
+		&lt;path id="svg-inline-truck_body" ... />
+		&lt;path id="svg-inline-truck_cab" ... />
+		&lt;path id="svg-inline-truck_wheels" ... />
+	&lt;/symbol>
+&lt;/svg>
+	</code></pre>
+
+	<pre data-code="html"><code>
+&lt;svg>
+	&lt;use xlink:href="#svg-inline-truck">&lt;/use>
+&lt;/svg>
+	</code></pre>
+
+	<pre data-code="css"><code>
+#svg-inline-truck_body   { fill: red }
+#svg-inline-truck_cab    { fill: orange }
+#svg-inline-truck_wheels { fill: blue }
+	</code></pre>
+
+	<p>
+		Unfortunately, when using this same svg sprite as <b>external</b> asset, some browsers lose the ability to set a different color for each path:
+	</p>
+
+	<ul>
+		<li>
+			<img src="/assets/img/browser-logos/safari.svg">
+			Safari
+		</li>
+		<li>
+			<img src="/assets/img/browser-logos/chrome.svg">
+			Chrome
+		</li>
+		<li>
+			<img src="/assets/img/browser-logos/samsung.svg">
+			Samsung Browser
+		</li>
+	</ul>
+
+	<p>
+		However, there is a workaround, <a href="https://frontstuff.io/multi-colored-svg-symbol-icons-with-css-variables">using CSS custom properties</a> to achieve <b>cross-browser svg path coloring</b>, in a easy way:
+	</p>
+
+	<svg class="svg-external-truck">
+		<use xlink:href="sprite.svg#svg-external-truck" />
+	</svg>
+
+	<pre data-code="svg"><code>
+&lt;svg ... >
+	&lt;symbol id="svg-external-truck" ... >
+		&lt;path fill="var(--color-truck_body)" ... />
+		&lt;path fill="var(--color-truck_cab)" ... />
+		&lt;path fill="var(--color-truck_wheels)" ... />
+	&lt;/symbol>
+&lt;/svg>
+	</code></pre>
+
+	<pre data-code="html"><code>
+&lt;svg class="svg-external-truck">
+	&lt;use xlink:href="sprite.svg#svg-external-truck" />
+&lt;/svg>
+	</code></pre>
+
+	<pre data-code="sass"><code>
+$color-truck_body:   red;
+$color-truck_cab:    orange;
+$color-truck_wheels: blue;
+
+.svg-external-truck {
+	// Browsers that DO support custom properties
+	--color-truck_body:   $color-truck_body;
+	--color-truck_cab:    $color-truck_cab;
+	--color-truck_wheels: $color-truck_wheels;
+
+	// Browsers that DO NOT support custom properties
+	[fill="var(--color-truck_body)"]   { fill: $color-truck_body }
+	[fill="var(--color-truck_cab)"]    { fill: $color-truck_cab }
+	[fill="var(--color-truck_wheels)"] { fill: $color-truck_wheels }
+}
+	</code></pre>
+
+	<p>If no color is applied, svg paths <b>will remain black</b>, by default.</p>
+
+	<h2>Notes:</h2>
+
+	<ul>
+		<li>
+			Some browsers don't <a href="https://caniuse.com/#feat=mdn-svg_elements_use_external_uri">support external svg sprite assets</a>, so you should <a href="https://css-tricks.com/ajaxing-svg-sprite/">ajax for the sprite</a>.
+		</li>
+		<li>
+			Serve external sprite from <b>same domain as main document</b>, to avoid <a href="https://oreillymedia.github.io/Using_SVG/extras/ch10-cors.html">cross-origin issues</a>.
+		</li>
+		<li>
+			There is a simpler technique, limited to 2 different colors, using
+			<a href="https://codepen.io/FWeinb/post/quick-tip-svg-use-style-two-colors"><code>fill="currentColor"</code></a>
+		</li>
+	</ul>
+
+	<h2>More info:</h2>
+
+	<ul>
+		<li>
+			<a href="https://codepen.io/supersimplenet/pen/zYvbPyN">
+				SVG sprite viewer
+			</a>
+		</li>
+		<li>
+			<a href="https://css-tricks.com/svg-fragment-identifiers-work/">
+				How SVG Fragment Identifiers Work
+			</a>
+		</li>
+		<li>
+			<a href="https://codepen.io/noahblon/post/coloring-svgs-in-css-background-images">
+				Coloring SVGs in CSS Background Images
+			</a>
+		</li>
+		<li>
+			<a href="https://css-tricks.com/gotchas-on-getting-svg-into-production/">
+				5 Gotchas You're Gonna Face Getting Inline SVG Into Production
+			</a>
+		</li>
+	</ul>
+
+	<hr>
+
+	<p><a href="/blog/">+ SEE MORE ARTICLES</a></p>
+</main>
+
+<footer>
+  Créditos:
+	<a href="https://fontawesome.com">Font Awesome</a>
+</footer>
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none">
+	<symbol viewBox="0 0 32 32" id="svg-inline-truck" xmlns="http://www.w3.org/2000/svg">
+		<path id="svg-inline-truck_body" d="M0 4c0-.736.596-1.334 1.334-1.334h20c.736 0 1.332.598 1.332 1.334v17.334a1.334 1.334 0 0 1-1.332 1.332h-20A1.334 1.334 0 0 1 0 21.334V4zm2.666 1.334V20H20V5.334H2.666z"/>
+		<path id="svg-inline-truck_cab" d="M20 10.666c0-.736.596-1.332 1.334-1.332h5.332c.354 0 .694.14.944.39l4 4c.241.241.39.574.39.942v6.668a1.334 1.334 0 0 1-1.334 1.332h-9.332A1.334 1.334 0 0 1 20 21.334V10.666zM22.666 12v8h6.668v-4.78L26.114 12h-3.448z"/>
+		<path id="svg-inline-truck_wheels" d="M24.666 29.334a4.667 4.667 0 0 0 0-9.334 4.667 4.667 0 0 0 0 9.334zm0-2.668a2 2 0 1 1 0-4 2 2 0 1 1 0 4z M7.334 29.334a4.667 4.667 0 0 0 0-9.334 4.667 4.667 0 0 0 0 9.334zm0-2.668a2 2 0 1 1 0-4 2 2 0 1 1 0 4z"/>
+	</symbol>
+</svg>
+
+
+
+
+<script src="https://jonneal.dev/svg4everybody/svg4everybody.min.js"></script>
+<script>svg4everybody(); // run it now or whenever you are ready</script>
+
+
+<!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140463028-1"></script>-->
+<!--<script>-->
+    <!--window.dataLayer = window.dataLayer || [];-->
+    <!--function gtag(){dataLayer.push(arguments);}-->
+    <!--gtag('js', new Date());-->
+    <!--gtag('config', 'UA-140463028-1');-->
+<!--</script>-->
+</body>
+</html>
