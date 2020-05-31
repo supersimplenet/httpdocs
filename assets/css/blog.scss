@@ -222,8 +222,11 @@ $vertical-rhythm: 1rem;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
 
-    li + li {
-      margin-top: $vertical-rhythm / 2;
+    li {
+      + li,
+      li {
+        margin-top: $vertical-rhythm / 2;
+      }
     }
   }
 }
@@ -290,7 +293,7 @@ ol {
     counter-increment: ol-counter;
 
     &:before {
-      content: counter(ol-counter)'.';
+      content: counters(ol-counter, '.')' ';
       font-weight: 600;
     }
   }
