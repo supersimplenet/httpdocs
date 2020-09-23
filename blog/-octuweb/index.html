@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS aritmético: exprimiendo <code>calc</code></title>
+</head>
+<body>
+	<h1>CSS aritmético: exprimiendo <code>calc</code></h1>
+
+	<p>
+		<code>calc</code> permite trabajar con las cuatro operaciones aritméticas básicas (suma, resta, división y multiplicación), de la misma manera que podríamos hacerlo con pre-procesadoress como <a href="https://sass-lang.com/">Sass</a> o <a href="http://lesscss.org/">Less</a>. Sin embargo, <code>calc</code> tiene una importante ventaja:
+	</p>
+
+	<p>
+		<b>Permite utilizar varios tipos de unidades, dentro de una misma operación</b>, incluyendo:
+	</p>
+
+	<ul>
+		<li>
+			<a href="https://developer.mozilla.org/es/docs/Web/CSS/length#Unidades_de_longitud_absoluta">
+				Unidades de longitud absoluta</a>:
+			px, cm ...
+		</li>
+		<li>
+			<a href="https://developer.mozilla.org/es/docs/Web/CSS/length#Longitudes_relativas_a_la_fuente">
+				Unidades relativas a la fuente</a>:
+			em, rem ...
+		</li>
+		<li>
+			<a href="https://developer.mozilla.org/es/docs/Web/CSS/length#Longitudes_de_porcentaje_del_viewport">
+				Unidades relativas a un elemento padre</a>:
+			%, vm ...
+		</li>
+	</ul>
+
+	<p>
+		A continuación, veremos un compendio de técnicas que nos permitirán exprimir las capacidades de <code>calc</code>, más allá de las operaciones básicas:
+	</p>
+
+	<ul>
+		<li>
+			<a href="#tipografia-responsiva">
+				Tipografía <i>responsiva</i>
+			</a>
+		</li>
+		<li>
+			<a href="#interlineado-dinamico">
+				Interlineado dinámico
+			</a>
+		</li>
+		<li>
+			<a href="#disposicion-elementos-segun-ancho-disponible">
+				Disposición de elementos según el ancho disponible
+			</a>
+		</li>
+		<li>
+			<a href="#condicionales-con-variables-css">
+				Condicionales con variables CSS
+			</a>
+		</li>
+	</ul>
+
+	<h2 id="tipografia-responsiva">Tipografía <i>responsiva</i></h2>
+
+	<p>
+		Para que el tamaño de fuente sea mayor, cuanto mayor sea el tamaño de la pantalla, podemos utilizar la siguiente fórmula:
+	</p>
+
+<pre><code>/* font-size: calc(tamañoFuenteMínimo + tamañoFuenteVariable) */
+   font-size: calc(16px               + 3vw                 )
+</code></pre>
+
+	<p>Donde <code>tamañoFuenteVariable</code> lo expresamos como una unidad que se computa por el 3% del ancho de la ventana del navegador (100vw sería el 100% del ancho de la ventana).</p>
+
+	<table>
+		<thead>
+		<tr>
+			<th>
+				Ancho de la ventana
+			</th>
+			<th>
+				font-size resultante
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<th>
+				100px
+			</th>
+			<td>
+				16px + 3px
+			</td>
+		</tr>
+		<tr>
+			<th>
+				1000px
+			</th>
+			<td>
+				16px + 30px
+			</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<p>
+		Por tanto, a mayor tamaño de pantalla, aprovechamos que hay más espacio disponible para hacer el texto más legible, aumentado el tamaño de letra.
+	</p>
+
+	<p>
+		Si necesitamos un control más fino sobre el tamaño de la fuente, por ejemplo para especificar <i>saltos</i> de tamaño de texto entre determinados anchos de pantalla, podemos utilizar una fórmula más compleja:
+	</p>
+
+<pre><code>/* font-size: calc(tamañoFuenteMínimoPX + (tamañoFuenteMáximo - tamañoFuenteMínimo) * ((100vw - anchoPantallaMínimoPX) / (anchoPantallaMáximo - anchoPantallaMínimo))) */
+   font-size: calc(12px                 + (24                 - 12                ) * ((100vw - 400px                ) / (800                 - 400                )));
+</code></pre>
+
+	<h3>Más información:</h3>
+
+	<ul>
+		<li>
+			<a href="https://www.madebymike.com.au/writing/precise-control-responsive-typography/">
+				Precise control over responsive typography
+			</a>
+		</li>
+		<li>
+			<a href="https://fvsch.com/css-locks">
+				The math of CSS Locks
+			</a>
+		</li>
+	</ul>
+
+	<h2 id="interlineado-dinamico">Interlineado dinámico</h2>
+
+	<p>Para el interlineado, el valor base recomendado suele ser apróximadamente <b>1.5</b> (sin unidad). El problema es que a tamaños de fuente grandes, se produce un interlineado excesivo, por lo que deberemos ir reduciendo el interlineado progrevisamente, hasta un valor aproximado de <b>1.1</b></p>
+
+	<p>
+		<a href="https://codepen.io/supersimplenet/pen/RwWyjKV">
+			https://codepen.io/supersimplenet/pen/RwWyjKV
+		</a>
+	</p>
+
+	<p>
+		Sin embargo, podemos utilizar <code>calc</code> para obtener un alto de línea dinámico, en función del tamaño de la tipografía, sin necesidad de ir retocando manualmente el valor de <code>line-height</code> con cada cambio de <code>font-size</code>.
+	</p>
+
+	<p>
+		Para encontrar la fórmula que generará este interlineado dinámico, veamos los números de nuestro ejemplo:
+	</p>
+
+	<table>
+		<thead>
+		<tr>
+			<th>&nbsp;</th>
+			<th>line-height: 1.5</th>
+			<th>line-height: 1.1</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<th>font-size: 10px</th>
+			<td>15px</td>
+			<td><del>11px</del></td>
+		</tr>
+		<tr>
+			<th>font-size: 50px</th>
+			<td><del>75px</del></td>
+			<td>55px</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<p>
+		<i>Los valores tachados, indican interlineados visualmente demasiado grandes, o demasiado pequeños.</i>
+	</p>
+
+	<p>
+		Según los datos de la tabla, para obtener un interlineado óptimo necesitaremos acercanos lo máximo posible a <b>15px</b> en tamaños de fuente pequeños, y <b>55px</b> en fuentes más grandes.
+	</p>
+
+	<p>En realidad, el valor de <b>11px</b> ya está bastante cerca de <b>15px</b>. ¿Y si añadiésemos al valor <b>1.1</b> sólo unos pocos píxeles?</p>
+
+<pre><code>line-height: calc(2px + 1.1 + 2px)</code></pre>
+
+	<p>Veamos de nuevo la tabla comparativa, añadiendo los resultados obtenidos con la fórmula:</p>
+
+	<table>
+		<thead>
+		<tr>
+			<th>&nbsp;</th>
+			<th>line-height: 1.5</th>
+			<th>line-height: (2px + 1.1 + 2px)</th>
+			<th>line-height: 1.1</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<th>font-size: 10px</th>
+			<td>15px</td>
+			<td>15px</td>
+			<td><del>11px</del></td>
+		</tr>
+		<tr>
+			<th>font-size: 50px</th>
+			<td><del>75px</del></td>
+			<td>59px</td>
+			<td>55px</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<p>
+		Parece que a tamaños de fuente grandes, nuestra fórmula también es válida, ya que aproxima bastante el valor obtenido (<b>59px</b>) al valor visualmente óptimo (<b>55px</b>).
+	</p>
+
+	<p>Desafortunadamente, <code>line-height: calc(2px + 1.1 + 2px)</code> es CSS inválido, ya que <code>calc</code> no permite mezclar valores con y sin unidad.</p>
+
+	<p>Sin embargo, podemos echar mano de la unidad <code>ex</code>, que responde al alto de la letra "x" de la fuente en uso, para obtener un valor similar a <b>1.1</b></p>
+
+	<p>Como puedes ver en el siguiente ejemplo, un valor de <b>2ex</b> funciona bastante bien con fuentes muy diversas:</p>
+
+	<p>
+		<a href="https://codepen.io/supersimplenet/pen/vYNjaem">
+			https://codepen.io/supersimplenet/pen/vYNjaem
+		</a>
+	</p>
+
+	<p>
+		Por tanto, aunque tengamos que ajustarla un poco, según la fuente utilizada, la siguiente fórmula parece un buen punto de partida:
+	</p>
+
+<pre><code>/* line-height: calc(margenExtra + alturaDinámica + margenExtra) */
+   line-height: calc(2px         + 2ex            + 2px        )
+</code></pre>
+
+	<h3>Más información:</h3>
+
+	<ul>
+		<li>
+			<a href="https://hugogiraudel.com/2020/05/18/using-calc-to-figure-out-optimal-line-height/">
+				Using calc to figure out optimal line-height
+			</a>
+		</li>
+	</ul>
+
+	<h2 id="disposicion-elementos-segun-ancho-disponible">Disposición de elementos según el ancho disponible</h2>
+
+	<p>Imagina que tienes un elemento <b>Padre</b>, con varios elementos <b>Hijo</b>, que quieres disponer según estas condiciones:</p>
+
+	<ul>
+		<li>
+			Si el ancho del elemento <b>Padre</b> es MENOR de 300px, apila verticalmente los elementos <b>Hijo</b>, en una misma columna.
+		</li>
+		<li>
+			Si el ancho del elemento <b>Padre</b> es MAYOR O IGUAL a 300px, distribuye horizontalmente los elementos <b>Hijo</b>, en una misma línea.
+		</li>
+		<li>
+			En ambos casos, los elementos <b>Hijo</b> deberán ocupar todo el espacio horizontal disponible.
+		</li>
+	</ul>
+
+	<p>Veamos estas condiciones, más claramente, en un diagrama:</p>
+
+	<img src="1.png">
+
+	<p>
+		No podríamos utilizar <a href="https://developer.mozilla.org/es/docs/CSS/Media_queries">media queries</a>, ya que aplican sobre el tamaño de la ventana del navegador, no sobre el tamaño de un elemento en particular (en nuestro caso, el elemento <b>Padre</b>).
+	</p>
+
+	<p>
+		Afortunadamente, haciendo uso de las propiedades <i>flexbox</i>, y un pequeña fórmula, podremos solucionar el problema, sólo con CSS:
+	</p>
+
+
+<pre><code>.padre {
+	/* Hace flexibles a los elementos hijo */
+	display: flex;
+	/* Permite que los elementos hijo se apilen verticalmente, si es necesario * /
+	flex-wrap: wrap;
+}
+
+.hijo {
+	/* Hace que los elementos hijo ocupen todo el ancho disponible */
+	flex-grow: 1;
+	/* Esta es fórmula, que usamos a modo de "container query" */
+	flex-basis: calc((300px - 100%)) * 9999);
+}</code></pre>
+
+	<h3>¿Cómo funciona?</h3>
+
+	<p>Diseccionemos nuestra formula:</p>
+
+	<ul>
+		<li>
+			<code>300px</code> actúa como nuestro <i>breakpoint</i>, el punto a partir del cual los elementos <b>Hijo</b> pasarán de distribuirse verticalmente, a hacerlo horizontalmente.</li>
+		<li>
+			<code>100%</code> se computará siempre como el ancho del elemento <b>Padre</b> correspondiente.
+		</li>
+		<li>
+			<code>9999</code> es un multiplicador, que utilizaremos para obtener un resultado de mayor magnitud.
+		</li>
+	</ul>
+
+	<p>Por tanto:</p>
+
+	<ul>
+		<li>
+			Si el ancho del elemento <b>Padre</b> es MAYOR de 300px, el resultado será un número negativo muy grande:
+			<br><code>(300px - 301px) * 9999 = -9999px</code>
+		</li>
+		<li>
+			Si el ancho del elemento <b>Padre</b> es MENOR de 300px, el resultado siempre será un número positivo muy grande:
+			<br><code>(300px - 299px) * 9999 = 9999px</code>
+		</li>
+		<li>
+			Si el ancho del elemento <b>Padre</b> es IGUAL a 300px, el resultado será cero:
+			<br><code>(300px - 300px) * 9999 = 0px</code>
+		</li>
+	</ul>
+
+	<p>De esta manera, obtenemos un valor <b>interruptor</b> de 3 posiciones (negativo, positivo y cero) que cambiará dinámicamente, en función del ancho del elemento <b>Padre</b>.</p>
+
+	<p>
+		Una vez hecho nuestro cálculo, aprovecharemos las peculiaridades de <code>flex-basis</code>, para obtener la maquetación dinámica que queremos:
+	</p>
+
+	<ul>
+		<li>
+			Cualquier valor negativo es inválido, y será automáticamente computado como el valor <code>auto</code>. A efectos de nuestro ejemplo, consideraremos que <code>flex-basis: auto</code> se comporta igual a <code>flex-basis: 0</code>.
+		</li>
+		<li>
+			Un valor positivo muy alto (9999px en nuestro ejemplo) nunca "cabrá" en el espacio disponible en elemento <b>Padre</b>. Por tanto, entrará en juego la propiedad <code>flex-wrap: wrap</code>, haciendo que los elementos <b>Hijo</b> se apilen verticalmente.
+		</li>
+	</ul>
+
+	<p>Una técnica similar, aplicando un valor <b>interruptor</b> dinámico, </p>
+
+	<p>
+		Existe <a href="https://www.estudionexos.com/post/css-responsive-sin-usar-media-queries/">otra técnica similar</a>, que aplica el mismo valor <b>interruptor</b> a las propiedades <code>width</code>, <code>min-width</code> y <code>max-width</code>, en lugar de a <code>flex-basis</code>.
+	</p>
+
+	<h3>Más información:</h3>
+
+	<ul>
+		<li>
+			<a href="https://heydonworks.com/article/the-flexbox-holy-albatross/">
+				The Flexbox Holy Albatross
+			</a>
+		</li>
+		<li>
+			<a href="https://heydonworks.com/article/the-flexbox-holy-albatross-reincarnated/">
+				The Flexbox Holy Albatross Reincarnated
+			</a>
+		</li>
+		<li>
+			<a href="https://www.freecodecamp.org/news/the-fab-four-technique-to-create-responsive-emails-without-media-queries-baf11fdfa848/">
+				Fab Four technique
+			</a>
+		</li>
+	</ul>
+
+	<h2 id="condicionales-con-variables-css">Condicionales con variables CSS</h2>
+
+	<p>
+		Utilizando un <b>interruptor</b>, de manera similar a la técnica anterior, combinado con
+		<a href="https://developer.mozilla.org/es/docs/Web/CSS/Using_CSS_custom_properties">
+			variables CSS</a>, podemos generar condicionales en nuestros estilos.
+	</p>
+
+<pre><code>
+:root {
+	--interruptor: 0;
+}
+
+.interruptor-activado {
+	--interruptor: 1;
+}
+
+.elemento {
+	padding: calc(
+		1px * (1 - var(--interruptor)) +
+		10px * var(--interruptor)
+	);
+}
+</code></pre>
+
+	<p>
+		De este modo, <code>.elemento</code> tendrá <code>padding: 1px</code>, mientras que <code>.elemento.interruptor-activado</code> tendrá <code>padding: 10px</code>
+	</p>
+
+	<p>
+		Obviamente, se trata de un ejemplo muy simple, que podría conseguirse de manera mucho más sencilla:
+	</p>
+
+<pre><code>
+.elemento {
+	padding: 1px;
+}
+
+.elemento.interruptor-activado {
+	padding: 10px;
+}
+</code></pre>
+
+	<p>
+		De todos modos, es una técnica interesante que podemos tener en nuestro <i>arsenal</i>, para utilizarla en situaciones donde nos sea más útil.
+	</p>
+
+	<h3>Más información:</h3>
+
+	<ul>
+		<li>
+			<a href="https://www.kizu.ru/conditions-for-css-variables/ ">
+				Conditions for CSS Variables
+			</a>
+		</li>
+	</ul>
+</body>
