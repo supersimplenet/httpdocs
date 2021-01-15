@@ -1,0 +1,7 @@
+.products-grid {
+  .product-items {
+    .product-item {
+      @extend .module-product;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.custom-pagination {
+	text-align: center;
+	font-size: 14px;
+}
+
+.custom-pagination-progress {
+	width: 115px;
+	height: 2px;
+	background-color: #ededed;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.custom-pagination-progress-inner {
+	background-color: $green;
+	height: 100%;
+	transition: width 1s;
+}
+
+.custom-pagination-text {
+	color: $dark-grey;
+	margin-top: 10px;
+}
+
+.custom-pagination-more {
+	text-transform: uppercase;
+	margin-top: 15px;
+	font-size: inherit;
+
+	.custom-pagination.inactive & {
+		display: none;
+	}
+}

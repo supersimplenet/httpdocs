@@ -1,0 +1,20 @@
+[data-role="swatch-options"] {
+  .swatch {
+    &-option {
+      &.text {
+        line-height: 12px;
+      }
+    }
+  }
+}
+.product-item-extra {
+  .swatch-attribute {
+    .swatch {
+      &-option {
+        &.text {
+          line-height: 12px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+.product-label-promo,
+.product-label {
+	pointer-events: auto;
+	//cursor: pointer;
+
+	&:not(:hover) {
+		p {
+			display: none;
+		}
+	}
+
+	img {
+		padding-bottom: 10px;
+	}
+
+	> img:not(:hover) {
+		+ p {
+			display: none;
+		}
+	}
+
+	 > p {
+		$shadow-color: $grey;
+		$arrow-size: 10px;
+		$background-color: $white;
+
+		text-align: left;
+		z-index: map_get($z-index, product-seal-tooltip);
+		position: absolute;
+		top: auto;
+		left: auto;
+		width: 215px;
+		background-color: $background-color;
+		padding: 12px 10px 10px;
+		border-radius: $border-radius;
+		box-shadow: 0 0 4px 0 $shadow-color;
+        color: black;
+		font-size: 13px;
+		font-weight: 300;
+		line-height: 1.31;
+
+		@include media-breakpoint-down(lg) {
+			width: auto;
+		}
+
+		&:empty {
+			display: none;
+			 &:before,
+			 &:after {
+				 display: none;
+			 }
+		}
+
+		&:before,
+		&:after { // tooltip arrow
+			bottom: 100%;
+			left: 25px;
+			border: solid transparent;
+			content: '';
+			height: 0;
+			width: 0;
+			position: absolute;
+			pointer-events: none;
+
+			@include media-breakpoint-down(lg) {
+				display: none;
+			}
+		}
+
+		&:before {
+			border-color: transparent;
+			border-bottom-color: rgba($shadow-color, 0.3);
+			border-width: $arrow-size;
+			margin-left: $arrow-size * -1;
+		}
+
+		&:after {
+			$size: $arrow-size - 2;
+			border-bottom-color: $background-color;
+			border-width: $size;
+			margin-left: $size * -1;
+		}
+
+	}
+}
+
+.product-label-promo {
+	img {
+		max-width: 100%;
+	}
+}

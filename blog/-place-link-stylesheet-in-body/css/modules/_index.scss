@@ -1,0 +1,82 @@
+// @source http://smacss.com/book/type-module
+//
+// Module Rules
+//
+// As briefly mentioned in the previous section, a Module is a more discrete
+// component of the page. It is your navigation bars and your carousels and
+// your dialogs and your widgets and so on. This is the meat of the page.
+// Modules sit inside Layout components. Modules can sometimes sit within
+// other Modules, too. Each Module should be designed to exist as a standalone
+// component. In doing so, the page will be more flexible. If done right,
+// Modules can easily be moved to different parts of the layout without
+// breaking.
+//
+// When defining the rule set for a module, avoid using IDs and element
+// selectors, sticking only to class names. A module will likely contain a
+// number of elements and there is likely to be a desire to use descendent
+// or child selectors to target those elements.
+
+//@import "app";
+@import "navigation";
+@import "buttons";
+@import "home";
+//@import "newsletter";
+@import "minicart";
+//@import "promo-top";
+//@import "breadcrumbs";
+//@import "products-grid";
+//@import "page-title";
+@import "search";
+//@import "modals";
+//@import "toolbar";
+@import "forms";
+//@import "messages";
+//@import "product";
+//@import "product-seals";
+//@import "customer-reviews";
+//@import "ratings";
+//@import "tabs";
+//@import "collapsible-nav";
+//@import "loading";
+//@import "pager";
+//@import "reviews";
+//@import "filter";
+//@import "swatches";
+//@import "table";
+@import "slider";
+@import "icons";
+//@import "cookieconsent";
+//@import "distributor-twin";
+//@import "distributor-four";
+//@import "related";
+//@import "quickview";
+//@import "qty-selector";
+//@import "custom-scrollbar";
+@import "rating-stars";
+//@import "product-card";
+//@import "product-label";
+//@import "jcf-select-custom-select";
+//@import "returns-info-modal";
+//@import "custom-pagination";
+//@import "fotorama";
+//@import "account-sidebar";
+@import "contact-details";
+//@import "brands";
+@import "brands-home-section";
+//@import "free-shipping-progress";
+//@import "login-popup";
+//@import "contact-details";
+//@import "order-summary";
+//@import "customer-support-details";
+//@import "addtocart-popup";
+//@import "checkout-benefits-bottom";
+//@import "adyen";
+//@import "search-no-results";
+//@import "salesrule-coupon";
+//@import "promise-date";
+//@import "popups";
+//@import "promotag-tooltip";
+//@import "product-tiered";
+//@import "login-register";
+//@import "register-popup";
+//@import "app-modal";

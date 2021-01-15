@@ -1,0 +1,166 @@
+.jcf-select-custom-select {
+  $option-padding: 15px 20px 15px 25px;
+  margin: 0;
+  min-width: auto;
+  text-align: left;
+
+  &.jcf-focus {
+    border-color: $green !important;
+  }
+
+  .jcf-select-text {
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0;
+  }
+
+  .jcf-select-opener {
+    display: none;
+  }
+
+  .jcf-select-drop {
+    @include media-breakpoint-up(xl) {
+      top: $custom-select-border-width * -1;
+    }
+  }
+
+  .jcf-select-drop-content {
+    border: 0;
+  }
+
+  .jcf-select-drop-wrap {
+    @include media-breakpoint-down(lg) {
+      background-color: rgba(0, 0, 0, .66);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+
+  .jcf-select-drop-inner {
+    @include media-breakpoint-down(lg) {
+      width: 190px;
+      margin-left: 50vw;
+      margin-top: 45vh;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .jcf-list {
+    font-weight: normal;
+    color: $black;
+
+    @include media-breakpoint-down(lg) {
+      font-size: 18px;
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+
+    @include media-breakpoint-up(xl) {
+      font-size: 16px;
+      border-radius: $border-radius;
+      overflow: hidden;
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.14);
+      background-color: $white;
+    }
+  }
+
+  .jcf-option {
+    @include media-breakpoint-down(lg) {
+      padding: $option-padding;
+      border-bottom: 1px solid #eff0ef !important;
+    }
+
+    @include media-breakpoint-up(xl) {
+      padding: 10px 5px;
+      display: flex;
+
+      &:before {
+        @include icon(check);
+        color: transparent;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .jcf-hover {
+    @include media-breakpoint-up(xl) {
+      background-color: transparent;
+      color: $green;
+    }
+  }
+
+  .jcf-selected {
+    @include media-breakpoint-down(lg) {
+      background-color: #fafafa;
+      border-left-color: $green;
+      position: relative;
+
+      &:before {
+        content: '';
+        width: 4px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        background-color: $green;
+      }
+    }
+
+    @include media-breakpoint-up(xl) {
+      background-color: $green;
+      color: $white;
+
+      &:before {
+        color: inherit;
+      }
+    }
+  }
+
+  .jcf-select-drop-head {
+    font-size: 17px;
+    font-weight: bold;
+    background-color: #eff0ef;
+    padding: $option-padding;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+    display: flex;
+    align-items: center;
+
+    @include media-breakpoint-up(xl) {
+      display: none;
+    }
+  }
+
+  .jcf-select-drop-head-close {
+    margin-left: auto;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    outline: 0;
+
+    &:after {
+      @include icon(close);
+    }
+  }
+
+  .jcf-scrollbar-vertical {
+    width: 2px;
+    background-color: transparent;
+  }
+
+  .jcf-scrollbar-dec,
+  .jcf-scrollbar-inc {
+    height: 0;
+  }
+
+  .jcf-scrollbar-handle {}
+}
+
+.jcf-list-content {
+  @include custom-scrollbar(
+    $track-color: transparent
+  );
+}

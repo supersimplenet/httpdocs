@@ -1,0 +1,184 @@
+*:focus,
+*.focus {
+  outline: none;
+  box-shadow: none !important; // Overwrites Bootstrap style
+}
+
+html {
+  &:before {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: map_get($z-index, dark-layer);
+    background-color: $dark-layer-background-color;
+    display: none;
+  }
+
+  &.fotorama__fullscreen {
+    &:before {
+      display: block;
+    }
+  }
+
+  &.nav-open {
+    &:before {
+      display: block;
+
+      @include media-breakpoint-up(xl) {
+        z-index: map_get($z-index, dark-layer-below-page-header);
+      }
+    }
+  }
+}
+
+.pagebuilder-mobile-hidden{
+  @include media-breakpoint-down(sm) {
+    display: none;
+  }
+}
+
+.pagebuilder-mobile-only{
+  @include media-breakpoint-up(sm){
+    display: none;
+  }
+}
+
+.mm-page__blocker {
+  background-color: $dark-layer-background-color;
+}
+
+.page-wrapper{
+  .page.messages{
+    padding-left: 0;
+    padding-right: 0;
+    position: sticky;
+    top: 0;
+    z-index: map_get($z-index, page-messages);
+    max-width: map_get($container-max-widths, xl) - $grid-gutter-width;
+
+    .messages-container:not(.visible) {
+      .ico-close {
+        display: none;
+      }
+    }
+
+    .message-error {
+      padding-right: $message-close-icon-margin-x + $message-close-icon-width + $message-close-icon-margin-x;
+    }
+
+    .ico-close {
+      cursor: pointer;
+      position: absolute;
+      right: $message-close-icon-margin-x;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: $message-close-icon-width;
+    }
+  }
+}
+
+
+.container-fluid {
+  max-width: 1200px;
+  @include media-breakpoint-only(md) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+.columns {
+  .column.main {
+    margin-bottom: 70px;
+
+    .checkout-cart-index & {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.page-main {
+  position: relative;
+  min-height: 300px;
+  background-color: $body-background-color;
+}
+
+.row {
+  &.big-gutters {
+    @include media-breakpoint-up(lg) {
+      > [class*="col-"] {
+        padding-left: 50px;
+        padding-right: 50px;
+      }
+    }
+  }
+}
+
+.columns .column.main {
+  max-width: initial !important;
+}
+
+ul, ol {
+  padding-left: 0;
+  li {
+    list-style: none;
+  }
+}
+
+a {
+  color: $link-color;
+  text-decoration: $link-decoration;
+  &:hover {
+    color:$link-hover-color;
+    text-decoration:$link-hover-decoration
+  }
+}
+
+a:focus {
+  outline: none;
+}
+
+@include media-breakpoint-down(md) {
+  .columns {
+    .column.main {
+      margin-bottom: 47px;
+    }
+  }
+}
+
+.scroll-page-top {
+  $right: 15px;
+  $padding: 10px;
+  $svg-size: 30px;
+  $size: $padding + $svg-size + $padding;
+
+  position: fixed;
+  right: $right;
+  bottom: 15px;
+  background-color: rgba($white, .5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  padding: $padding;
+  border-radius: 100%;
+
+  @include media-breakpoint-up(xl) {
+    $right: (map_get($grid-breakpoints, xl) / 2) + $size;
+
+    background-color: $white;
+    right: calc(50% - #{$right});
+  }
+
+  &:not(.visible) {
+    visibility: hidden;
+
+    * { // Forces descendants visibility
+      visibility: hidden;
+    }
+  }
+
+  svg {
+    width: $svg-size;
+    height: $svg-size;
+  }
+}

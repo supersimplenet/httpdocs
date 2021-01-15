@@ -1,0 +1,62 @@
+.product-label {
+	display: block;
+	padding: 5px;
+	font-size: 13px;
+	line-height: 1;
+	text-align: center;
+	background-color: $pink-light;
+	color: $white;
+	border-radius: 2px;
+	font-weight: $font-weight-medium;
+	//@include text-overflow();
+
+	svg {
+		vertical-align: top;
+	}
+
+	&.green {
+		background-color: $green;
+
+	}
+	&.black {
+		background-color: $black-bf;
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+	&.yellow {
+		background-color: $yellow;
+		color: $black;
+	}
+}
+
+.product-label--free-shipping {
+	text-transform: uppercase;
+}
+
+.product-label--coupon {}
+
+.product-label--latest-units {
+	text-transform: uppercase;
+}
+
+.product-label--generic {}
+
+.product-label--black-friday {
+	background-color: $black;
+	text-transform: uppercase;
+}
+
+.product-label--recommended-by {
+	background-color: $yellow;
+	color: $black;
+}
+
+.product-label--recommended-by__text {}
+
+.product-label--recommended-by__recommender {
+	font-weight: bold;
+}
+
+.product-label-promo {
+	pointer-events: none;
+}

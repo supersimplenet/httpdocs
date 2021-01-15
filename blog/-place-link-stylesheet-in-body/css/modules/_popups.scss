@@ -1,0 +1,14 @@
+.mfp-bg.mfp-ready {
+  z-index: map_get($z-index, mfp-popups-bg);
+}
+
+.mfp-wrap.mfp-ready {
+  z-index: map_get($z-index, mfp-popups-content);
+
+  .mfp-content {
+    .popup-content {
+      padding: 0;
+      @include unstyle-block-divs();
+    }
+  }
+}

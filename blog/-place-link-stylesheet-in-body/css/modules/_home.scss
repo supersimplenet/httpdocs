@@ -1,0 +1,44 @@
+.module-home {
+  background-color: $white;
+
+  &-inner {
+    //@extend .container;
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+
+  + .module-home {
+    background-color: $gray-200;
+
+    + .module-home {
+      background-color: $white;
+
+      + .module-home {
+        background-color: $gray-200;
+      }
+    }
+  }
+}
+
+.cms-home {
+  .page-main .column.main {
+    [data-content-type=row] div.discover-banner {
+      margin: 0 auto !important;
+      @include media-breakpoint-up(sm) {
+        max-width: 1190px;
+        margin-top: 50px !important;
+        text-align: center;
+      }
+
+      .pagebuilder-column-group {
+        @include media-breakpoint-down(md) {
+          flex-direction: column;
+          .pagebuilder-column {
+            width: 100% !important;
+            padding: 10px 0 !important;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+.message {
+  padding: 7px;
+  display: block;
+  position: relative;
+  background-color: $quinary;
+  border: 1px solid $quinary;
+  font-size: $font-size-base-alt;
+  text-align: center;
+  *:first-child:before {
+    content: '';
+    left: 15px;
+    top: 13px;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  &.error {
+    color: $white;
+    background-color: $danger;
+    border-color: $danger;
+  }
+  &.info, &.notice, &.warning {
+    border-color: $warning;
+    *:first-child:before {
+      background-image: url("../images/icons/ico-warning.svg");
+    }
+  }
+  &.success {
+    color: $white;
+    background-color: $success;
+    border-color: $success;
+    *:first-child:before {
+      background-image: url("../images/icons/ico-success.svg");
+      width: 15px;
+      height: 10px;
+    }
+    a{
+      color: #fff;
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,217 @@
+.amasty_xlanding-page-view {
+  .page-main {
+
+    .amasty-xlanding-top-image {
+      padding: 0 15px;
+      margin-bottom: 15px;
+
+      @include media-breakpoint-down(md) {
+        //padding: 0;
+        margin-bottom: 0;
+      }
+
+      img {
+        width: 100%;
+      }
+
+      & + .amasty-xlanding-top-description {
+        position: absolute;
+        top: 0px;
+        padding: 3% 2%;
+        max-width: 50%;
+
+        @include media-breakpoint-down(md) {
+          position: relative;
+          max-width: 100%;
+          padding: 10px 0;
+          h1 {
+            position: absolute;
+            top: -50px;
+          }
+        }
+      }
+    }
+
+    .amasty-xlanding-top-description {
+      margin: 0 15px;
+
+      h1 {
+        margin: 0px 0px 32px;
+        font-weight: bold;
+        height: 30px;
+        font-size: 28px;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.07;
+        color: black;
+
+        @include media-breakpoint-down(md) {
+          font-size: 22px;
+        }
+
+      }
+
+      p {
+        font-size: 14px;
+        color: #5e5e5e;
+        line-height: 1.57;
+        letter-spacing: normal;
+        @include media-breakpoint-down(md) {
+          color: #202020;
+        }
+      }
+    }
+
+    .amasty-xlanding-top-static {
+      padding: 0 15px;
+    }
+
+    .amasty-xlanding-bottom-description {
+      padding: 1rem;
+      background: #fff;
+      line-height: 22px;
+
+      p {
+        font-size: 14px;
+      }
+    }
+
+    .columns {
+      .main.row {
+        > #amasty-shopby-product-list {
+          padding: 0 15px;
+          width: 100%;
+
+          .product-list-filters {
+            padding: 0;
+            .filter-actions {
+              #amasty-shopby-product-list {
+                position: relative;
+                right: auto;
+                top: auto;
+              }
+            }
+          }
+        }
+
+        .amasty-xlanding-bottom-description {
+          margin: 0 15px;
+        }
+      }
+    }
+
+    // NATURITAS BRAND LANDING
+    .amasty-xlanding-top-static {
+      .head-text-holder{
+        .heading-text {
+          background: $yellow-light;
+          padding: 4% 15%;
+          @include media-breakpoint-down(md) {
+            padding: 15px;
+          }
+          .first-text {
+            font-size: 18px;
+            color: $darker-grey;
+            line-height: 24px;
+            font-weight: $font-weight-medium;
+          }
+        }
+      }
+
+      .esencials-holder {
+        padding: 20px 0;
+        width: 100%;
+        display: block;
+        .esencials-title {
+          font-size: 22px;
+          color: $darker-grey;
+          line-height: 20px;
+          font-weight: $font-weight-bold;
+        }
+        .esencials-list {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 10px 0;
+          @include media-breakpoint-down(md) {
+            display: block;
+          }
+        }
+        .thumb {
+          max-width: 16.6%;
+          @include media-breakpoint-down(md) {
+            max-width: 50%;
+            float: left;
+            padding: 5px;
+          }
+          a {
+            img {
+              width: auto;
+              max-width: 100%;
+              margin: auto;
+            }
+            span {
+              font-size: $font-size-base;
+              color: $darker-grey;
+              font-weight: $font-weight-medium;
+              display: block;
+              text-align: center;
+              margin: 5px 0 0px 0;
+              @include media-breakpoint-down(md) {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .amasty-xlanding-bottom-static {
+      .seo-bottom {
+        display: inline-flex;
+        justify-content: space-between;
+        align-content: center;
+        margin: 40px 0 60px 0;
+        background: $yellow-light;
+        padding: 20px 10px;
+        width: 100%;
+        @include media-breakpoint-down(md) {
+          flex-flow: column;
+        }
+        > img {
+          padding-right: 30px;
+          max-width: 100%;
+          width: 40%;
+          margin: auto;
+          display: block;
+          @include media-breakpoint-down(md) {
+            padding: initial;
+            width: auto;
+          }
+        }
+        .bottom-text {
+          iframe {
+            max-width: 100%;
+          }
+          b {
+            font-size: 17px;
+            color: $darker-grey;
+            line-height: 24px;
+            display: block;
+            margin-bottom: 10px;
+          }
+          small {
+            font-size: $font-size-base-alt;
+            color: $darker-grey;
+            line-height: 20px;
+            margin-bottom: 20px;
+            display: block;
+          }
+        }
+      }
+    }
+
+  }
+}

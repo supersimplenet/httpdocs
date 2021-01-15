@@ -1,0 +1,41 @@
+.toolbar {
+  .pages {
+    > .label {
+      @extend .sr-only;
+    }
+    .items {
+      .item {
+        display: inline;
+        font-size: $font-size-base;
+        padding: 0 10px;
+        font-family: $client-font;
+        font-weight: $font-weight-bold;
+        .page {
+          color: $light-grey;
+        }
+        &.current {
+          .page {
+            color: $black;
+          }
+        }
+        .label {
+          @extend .sr-only;
+        }
+        .action {
+          @extend .fa;
+          font-size: 16px;
+          color: $primary;
+          span {
+            display: none;
+          }
+          &.previous {
+            @extend .fa-chevron-left;
+          }
+          &.next {
+            @extend .fa-chevron-right;
+          }
+        }
+      }
+    }
+  }
+}

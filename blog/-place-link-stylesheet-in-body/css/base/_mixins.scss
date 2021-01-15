@@ -1,0 +1,477 @@
+@mixin container() {
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@mixin hide-text() {
+	display: block;
+	overflow: hidden;
+	text-indent: -999999999px;
+}
+
+@mixin hide-text-reset() {
+	// Undo text-indent: -999999999px;
+	float: left;
+	text-indent: 0;
+}
+
+@mixin rating-stars(
+	$star-margin: 0.05em,
+	$star-fill-selector: '& > *'
+) {
+	$star-width: 1.05em;
+	width: ($star-width * 5) + ($star-margin * 4);
+
+	height: 1em;
+	background-repeat: no-repeat;
+	background-size: 1em 1em;
+	background-image:
+		url('../images/icons/ico-star-empty.svg'),
+		url('../images/icons/ico-star-empty.svg'),
+		url('../images/icons/ico-star-empty.svg'),
+		url('../images/icons/ico-star-empty.svg'),
+		url('../images/icons/ico-star-empty.svg');
+	background-position:
+		0,
+		(1 * $star-width) + (1 * $star-margin),
+		(2 * $star-width) + (2 * $star-margin),
+		(3 * $star-width) + (3 * $star-margin),
+		(4 * $star-width) + (4 * $star-margin);
+
+	#{$star-fill-selector} {
+		height: 1em;
+		background-repeat: no-repeat;
+		background-size: 1em 1em;
+		background-image:
+			url('../images/icons/ico-star-full.svg'),
+			url('../images/icons/ico-star-full.svg'),
+			url('../images/icons/ico-star-full.svg'),
+			url('../images/icons/ico-star-full.svg'),
+			url('../images/icons/ico-star-full.svg');
+		background-position:
+			0,
+			(1 * $star-width) + (1 * $star-margin),
+			(2 * $star-width) + (2 * $star-margin),
+			(3 * $star-width) + (3 * $star-margin),
+			(4 * $star-width) + (4 * $star-margin);
+	}
+}
+
+@mixin accordion-title() {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	outline: none;
+
+	&:after {
+		margin-left: auto;
+		color: $green;
+		content: '+';
+	}
+
+	&[aria-expanded="true"] {
+		&:after {
+			content: '-';
+		}
+	}
+}
+
+@keyframes rotate {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@mixin spinner(
+	$size: 1em,
+	$border-width: .15em
+) {
+	width: $size;
+	height: $size;
+	animation: rotate 1s infinite linear;
+	border: $border-width solid;
+	border-top-color: transparent;
+	border-radius: 50%;
+}
+
+@mixin text-list($separator: ', ') {
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap;
+
+	li {
+		display: flex;
+
+		&:not(:last-child) {
+			&:after {
+				content: $separator;
+				white-space: pre;
+			}
+		}
+	}
+}
+
+@mixin unstyle-block-divs() {
+	// overrides default style on static block divs
+	[data-content-type="row"],
+	[data-content-type="row"] > div,
+	[data-content-type="row"] > div > div {
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+}
+
+@mixin grid-align-items($position) {
+	// workaround for grid + align-items on Internet Explorer 11
+	// https://caniuse.com/#feat=mdn-css_properties_align-self_grid_context
+	// autoprefixer will add -ms-grid-row-align
+	> * {
+		align-self: $position;
+	}
+}
+
+@mixin reset-button-styles() {
+	background: none;
+	border: none;
+	font: inherit;
+	padding: 0;
+}
+
+@mixin text-overflow($text-overflow: clip) {
+	text-overflow: $text-overflow;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+@mixin line-clamp($lines, $height: null) {
+	display: -webkit-box;
+	-webkit-line-clamp: $lines;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+
+	@if ($height) {
+		height: $height;
+	}
+}
+
+@mixin custom-switch(
+	$height: $custom-switch-height,
+	$width: $custom-switch-width,
+	$margin-inner: $custom-switch-margin-inner,
+	$color: $custom-switch-color,
+	$color-inner: $custom-switch-color-inner,
+	$color-success: $custom-switch-color-success
+) {
+	-webkit-appearance: none;
+	width: $width;
+	height: $height;
+	background-color: $color;
+	border-radius: 25% / 50%;
+	outline: 0;
+	border: 0;
+
+	&:before {
+		content: '';
+		display: block;
+		background-color: $color-inner;
+		border-radius: 50%;
+		width: calc((#{$width} - #{$margin-inner} - #{$margin-inner}) / 2);
+		height: calc(#{$height} - #{$margin-inner} - #{$margin-inner});
+		transform: translate($margin-inner, $margin-inner);
+	}
+
+	&::-ms-check { // using √ as switch indicator
+		border-color: transparent;
+		color: transparent;
+		transform: translateX(-50%); // Internet Explorer 11
+		transform: translateX(calc(-50% + #{$margin-inner})); // Edge
+		background-color: $color-inner;
+		border-radius: 50%;
+		width: calc((#{$width} - #{$margin-inner} - #{$margin-inner}) / 2);
+		height: calc(#{$height} - #{$margin-inner} - #{$margin-inner});
+	}
+
+	&:checked {
+		background-color: $color-success;
+		border-color: $color-success;
+
+		&:before {
+			transform: translate(calc(100% + #{$margin-inner}), $margin-inner);
+		}
+
+		&::-ms-check {
+			transform: translateX(50%); // Internet Explorer 11
+			transform: translateX(calc(50% - #{$margin-inner})); // Edge
+		}
+	}
+}
+
+@mixin custom-scrollbar(
+	$width:       $custom-scrollbar-width,
+	$thumb-color: $custom-scrollbar-thumb-color,
+	$track-color: $custom-scrollbar-track-color
+)
+{
+	overflow-y: auto;
+
+	// Standard
+	scrollbar-color: $thumb-color $track-color;
+	scrollbar-width: thin; // we can't use unit size
+
+	// Internet Explorer 11
+	scrollbar-face-color: $thumb-color;
+	scrollbar-track-color: $track-color;
+
+	// Webkit
+	&::-webkit-scrollbar {
+		width: $width;
+		background-color: $track-color;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: $thumb-color;
+	}
+
+	&::-webkit-scrollbar-track {}
+}
+
+@mixin float-label() {
+	position: relative;
+	.label {
+		transition: 0.2s ease all;
+		font-weight: normal;
+		position: absolute;
+		@include line-clamp(1);
+		font-size: $font-size-base;
+		margin-top: .8rem;
+		line-height: 1.2;
+		left: 16px;
+		font-weight: normal;
+		color: $dark-grey;
+
+		&.input-has-value {
+			// Prevents descending characters (q, j, p ...) being cut by line-clamp
+			font-size: .75em;
+			margin: .35em $input-padding-x 0 0;
+			padding-right: 15px;
+			padding-left: 0;
+			+ input,
+			+ .toggle-password + input {
+				padding-top: 1rem;
+				padding-bottom: 0.1rem;
+			}
+
+		}
+	}
+	input[type="radio"] + .label, input[type="checkbox"] + .label{
+		position: static;
+	}
+	input {
+		$padding-bottom: .1rem;
+		$padding-top: ($input-padding-y * 2) - $padding-bottom;
+		font-size: $font-size-base;
+		padding-top: $padding-top;
+		padding-bottom: $padding-bottom;
+		height: 45px;
+	}
+	input[type="password"],input[type="email"],input[type="text"], input[type="textarea"]{
+		padding-top: $input-padding-y;
+		padding-bottom: $input-padding-y;
+	}
+}
+
+@mixin product-card($mode: vertical) {
+	@if $mode == vertical {
+		border-radius: 2px;
+		background-color: $white;
+		padding: 10px;
+		position: relative;
+		overflow-y: hidden;
+	}
+
+	@if $mode == horizontal {
+		display: flex;
+		align-items: center;
+	}
+
+	&:hover {
+		@if $mode == vertical {
+			box-shadow: 0 0 5px 2px $light-grey;
+		}
+	}
+
+	.special-price-savings,
+	.actions-secondary {
+		@if $mode == vertical {
+			display: none;
+		}
+	}
+
+	.discount {
+		@if $mode == vertical {
+			// Fake triangle made of a rotated square, partially hidden by parent overflow
+			// This allow content to be centered automatically, with no magic numbers
+
+			$cathetus: 50px; // side of fake triangle
+			$hypotenuse: get-hypotenuse($cathetus);
+			$line-height: 1em;
+			$padding-bottom: 5px;
+
+			width: $hypotenuse;
+			line-height: $line-height;
+			padding-bottom: $padding-bottom;
+			padding-top: calc(#{$cathetus} - #{$line-height} - #{$padding-bottom}); // Pushes content to box bottom
+			position: absolute;
+			top: 0;
+			left: 0;
+			transform: rotate(-45deg);
+			transform-origin: left bottom;
+			text-align: center;
+			background-color: $pink-light;
+			color: $white;
+		}
+	}
+
+	.product-item-photo {
+		@if $mode == vertical {
+			display: block;
+			text-align: center;
+		}
+
+		@if $mode == horizontal {
+			margin-right: 10px;
+			width: 120px;
+			flex-shrink: 0;
+		}
+
+		img {
+			max-width: 100%;
+		}
+	}
+
+	.product-image-wrapper {
+		img {
+			@if $mode == vertical {
+				margin: auto;
+				display: block;
+			}
+		}
+	}
+
+	.product-item-details {
+		@if $mode == horizontal {
+			flex-grow: 1;
+		}
+	}
+
+	.product-item-brand {
+		@if $mode == vertical {
+			font-weight: $font-weight-medium;
+			font-size: $font-size-base-alt;
+			line-height: $line-height-small;
+			color: $grey;
+			display: block;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			padding-bottom: .25rem;
+
+			@include media-breakpoint-up(xl) {
+				padding-top: .25rem;
+			}
+		}
+	}
+
+	.product-item-name {
+		$line-height: $line-height-small;
+
+		@if $mode == vertical {
+			$lines: 3;
+			$height: $lines * $line-height * 1em;
+			@include line-clamp($lines, $height);
+			display: block;
+			font-weight: $font-weight-medium;
+			font-size: $font-size-base-alt;
+			line-height: $line-height;
+			color: $black;
+			margin-bottom: .25rem;
+		}
+
+		@if $mode == horizontal {
+			$lines: 2;
+			$height: $lines * $line-height * 1em;
+			@include line-clamp($lines, $height);
+			font-size: $font-size-base-alt;
+		}
+
+		a {
+			@if $mode == vertical {
+				color: inherit;
+				display: block;
+			}
+		}
+	}
+
+	.ratings-box {
+		@if $mode == vertical {
+			display: flex;
+			align-items: center;
+			font-size: $font-size-base-alt;
+		}
+
+		@if $mode == horizontal {
+			font-size: $font-size-base-custom;
+		}
+
+		.amount {
+			@if $mode == vertical {
+				color: $grey;
+				font-weight: $font-weight-medium;
+			}
+		}
+	}
+
+	.rating-stars {
+		@if $mode == vertical {
+			@include rating-stars;
+			margin-right: 5px;
+		}
+	}
+
+	.price-box {
+		@if $mode == vertical {
+			margin-top: .25rem;
+			margin-bottom: .5rem;
+			display: flex;
+			align-items: baseline;
+		}
+	}
+
+	.price {
+		@if $mode == vertical {
+			color: $black;
+			font-weight: $font-weight-bold;
+			font-size: 1.375em;
+			margin-right: 5px;
+		}
+	}
+
+	.old-price {
+		.price {
+			@if $mode == vertical {
+				color: $grey;
+				font-size: $font-size-base;
+				font-weight: $font-weight-normal;
+				text-decoration: line-through;
+			}
+		}
+	}
+
+	.tocart {
+		@if $mode == vertical {
+			font-size: 1em;
+			width: 100%;
+		}
+	}
+}

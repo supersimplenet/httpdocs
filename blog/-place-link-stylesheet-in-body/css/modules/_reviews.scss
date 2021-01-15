@@ -1,0 +1,25 @@
+.review-list {
+  .block-content {
+    .review-items {
+      .review-item {
+        padding: 20px 0;
+        border-bottom: 1px solid;
+      }
+    }
+  }
+}
+.review-add {
+  .block-title {
+    display: none;
+  }
+  .block-content {
+    .review-form {
+      .legend {
+        font-size: 16px;
+        strong {
+          display: block;
+        }
+      }
+    }
+  }
+}

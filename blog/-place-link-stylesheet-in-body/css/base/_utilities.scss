@@ -1,0 +1,26 @@
+@function square-root($r) {
+	$x0: 1;
+	$x1: $x0;
+
+	@for $i from 1 through 10 {
+		$x1: $x0 - ($x0 * $x0 - abs($r)) / (2 * $x0);
+		$x0: $x1;
+	}
+
+	@return $x1;
+}
+
+
+@function strip-unit($number) {
+	@return $number / ($number * 0 + 1);
+}
+
+@function square($number) {
+	$unitless: strip-unit($number);
+	@return ($unitless * $unitless);
+}
+
+@function get-hypotenuse($cathetus1, $cathetus2: $cathetus1) {
+	$hypotenuse: square-root(square($cathetus1) + square($cathetus2));
+	@return unquote($hypotenuse + unit($cathetus1));
+}

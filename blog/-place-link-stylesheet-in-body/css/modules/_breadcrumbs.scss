@@ -1,0 +1,49 @@
+.breadcrumbs {
+  margin-top: 30px;
+  font-size: $font-size-base-custom;
+  letter-spacing: 0.17px;
+  @include media-breakpoint-down(sm) {
+    white-space: nowrap;
+    width: calc(100% - 25px);
+    overflow: auto;
+    padding: 0;
+  }
+  .items {
+    padding-left: 0;
+    margin-bottom: 0;
+    display: flex;
+    > li {
+      margin: 0;
+      padding: 0;
+      list-style: none none;
+      display: inline-block;
+      vertical-align: top;
+      strong {
+        color: $black;
+        font-weight: $font-weight-normal;
+      }
+      a {
+        color: $dark-grey;
+        &:hover {
+          color: $green;
+        }
+      }
+    }
+  }
+  .item {
+    margin: 0;
+    &:not(:last-child) {
+      text-decoration: none;
+      display: flex;
+      align-items: flex-start;
+      &:after {
+        content: url("../images/icons/ico-chevron-right-grey.svg");
+        margin: 0 8px;
+        transform: translate(0, 2px);
+      }
+    }
+  }
+  a {
+    text-decoration: none;
+  }
+}

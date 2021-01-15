@@ -1,0 +1,57 @@
+.rating-summary {
+  .label {
+    display: none;
+  }
+  .rating {
+    &-result {
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+      &:before {
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        -webkit-font-smoothing: antialiased;
+        color: $yellow;
+        font-family: $font-icons;
+        height: 1em;
+        letter-spacing: 2px;
+        line-height: 1em;
+        content: '\f006' '\f006' '\f006' '\f006' '\f006';
+        display: block;
+        font-style: normal;
+        font-weight: normal;
+        speak: none;
+      }
+      > span {
+        display: block;
+        overflow: hidden;
+        &:before {
+          position: relative;
+          -webkit-font-smoothing: antialiased;
+          color: $yellow;
+          font-family: $font-icons;
+          height: 1em;
+          letter-spacing: 2px;
+          line-height: 1em;
+          content: '\f005' '\f005' '\f005' '\f005' '\f005';
+          display: block;
+          font-style: normal;
+          font-weight: normal;
+          speak: none;
+        }
+        span {
+          border: 0;
+          clip: rect(0, 0, 0, 0);
+          height: 1px;
+          margin: -1px;
+          overflow: hidden;
+          padding: 0;
+          position: absolute;
+          width: 1px;
+        }
+      }
+    }
+  }
+}
