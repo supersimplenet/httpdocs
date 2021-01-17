@@ -1,0 +1,105 @@
+.brands-home-section {
+  background-color: #fafafa;
+  position: relative;
+  padding: 30px 0 0;
+  /*.cms-index-index & {
+    @include media-breakpoint-down(lg) {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }*/ }
+  @media (max-width: 1199.98px) {
+    .brands-home-section {
+      margin-left: -15px;
+      margin-right: -15px; } }
+  .cms-brands .brands-home-section {
+    background-color: transparent;
+    padding-bottom: 0;
+    padding-top: 15px; }
+    @media (min-width: 1200px) {
+      .cms-brands .brands-home-section {
+        padding-top: 20px; } }
+  .brands-home-section h2 {
+    text-align: left;
+    margin-bottom: 25px;
+    padding-left: 6px;
+    display: flex;
+    align-items: baseline;
+    width: calc(100% - 100px); }
+    @media (max-width: 1199.98px) {
+      .brands-home-section h2 {
+        font-size: 22px;
+        padding-right: 0; } }
+    .cms-brands .brands-home-section h2 {
+      margin-bottom: 20px; }
+      @media (min-width: 1200px) {
+        .cms-brands .brands-home-section h2 {
+          text-align: center;
+          font-size: 28px;
+          margin-bottom: 35px; } }
+  .brands-home-section .container {
+    position: relative; }
+    .brands-home-section .container .see-brands {
+      position: absolute;
+      right: 2%;
+      top: 2%;
+      float: right;
+      text-align: right; }
+      .cms-brands .brands-home-section .container .see-brands, .cms-nossas-marcas .brands-home-section .container .see-brands {
+        display: none; }
+      .brands-home-section .container .see-brands a {
+        position: relative;
+        font-weight: 500;
+        color: #000000;
+        padding-bottom: 5px; }
+        .brands-home-section .container .see-brands a:hover {
+          text-decoration: none; }
+        .brands-home-section .container .see-brands a:after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 2px;
+          background-color: transparent;
+          border: 2px solid #47BD9B; }
+    .brands-home-section .container .brands-home-holder {
+      display: flex;
+      flex-flow: wrap;
+      position: relative;
+      align-items: center;
+      justify-content: space-between; }
+      .brands-home-section .container .brands-home-holder .slick-brands {
+        width: 100%; }
+        @media (max-width: 991.98px) {
+          .brands-home-section .container .brands-home-holder .slick-brands .slideset-brands .slick-list.draggable {
+            padding: 0 40px 0 0; } }
+        .brands-home-section .container .brands-home-holder .slick-brands .slideset-brands .brand-item {
+          float: left;
+          padding: 0 10px; }
+          .brands-home-section .container .brands-home-holder .slick-brands .slideset-brands .brand-item a {
+            display: block;
+            text-align: center;
+            outline: none; }
+            .brands-home-section .container .brands-home-holder .slick-brands .slideset-brands .brand-item a .img-thumb {
+              display: block; }
+              .brands-home-section .container .brands-home-holder .slick-brands .slideset-brands .brand-item a .img-thumb img {
+                width: 100%;
+                max-width: 175px;
+                height: auto; }
+        .brands-home-section .container .brands-home-holder .slick-brands .slideset-brands .slick-arrow {
+          z-index: 1;
+          background: none;
+          color: #202020;
+          cursor: pointer; }
+          .brands-home-section .container .brands-home-holder .slick-brands .slideset-brands .slick-arrow.slick-prev {
+            left: -20px; }
+          .brands-home-section .container .brands-home-holder .slick-brands .slideset-brands .slick-arrow.slick-next {
+            right: -20px; }
+          .brands-home-section .container .brands-home-holder .slick-brands .slideset-brands .slick-arrow.slick-disabled {
+            color: #ADADA9;
+            transition: all 0.3s;
+            cursor: default; }
+          @media (max-width: 767.98px) {
+            .brands-home-section .container .brands-home-holder .slick-brands .slideset-brands .slick-arrow {
+              display: none; } }
