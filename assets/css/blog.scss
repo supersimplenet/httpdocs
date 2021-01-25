@@ -3,317 +3,339 @@ $padding: .25rem;
 $margin-y: 1rem;
 
 $color-twitter: #00acee;
-$color-rss:     #ee802f;
+$color-rss: #ee802f;
 $font-size: 1.1rem;
 
 $vertical-rhythm: 1rem;
 
 @mixin container {
-  padding: .5rem;
+	padding: .5rem;
 
-  @media (min-width: $width) {
-    $width: $width / 2;
-    padding: 1rem calc(50% - #{$width});
-  }
+	@media (min-width: $width) {
+		$width: $width / 2;
+		padding: 1rem calc(50% - #{$width});
+	}
 }
 
 * {
-  margin: 0;
+	margin: 0;
 }
 
 html {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 300;
-  font-size: $font-size;
+	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+	font-weight: 300;
+	font-size: $font-size;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
+
 //
-h1 { font-size: $font-size + .5 }
-h2 { font-size: $font-size + .25 }
-h3 { font-size: $font-size }
-h4 { font-size: $font-size }
-h5 { font-size: $font-size }
-h6 { font-size: $font-size }
+h1 {
+	font-size: $font-size + .5
+}
+
+h2 {
+	font-size: $font-size + .25
+}
+
+h3 {
+	font-size: $font-size
+}
+
+h4 {
+	font-size: $font-size
+}
+
+h5 {
+	font-size: $font-size
+}
+
+h6 {
+	font-size: $font-size
+}
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
+	font-weight: 600;
 }
 
 p {
-  line-height: 1.5;
+	line-height: 1.5;
 }
 
 pre {
-  background: #eee;
-  padding: 0 1em;
-  font-family: inherit;
-  font-weight: 200;
-  overflow-y: auto;
-  tab-size: 1em;
+	background: #eee;
+	padding: 0 1em;
+	font-family: inherit;
+	font-weight: 200;
+	overflow-y: auto;
+	tab-size: 1em;
 
-  &[data-code] {
-    position: relative;
+	&[data-code] {
+		position: relative;
 
-    &:after {
-      content: attr(data-code);
-      text-transform: uppercase;
-      background-color: #ddd;
-      position: absolute;
-      top: 0;
-      left: 0;
-      font-weight: bold;
-      font-size: .75em;
-      padding: .25em;
-      line-height: 1;
-    }
-  }
+		&:after {
+			content: attr(data-code);
+			text-transform: uppercase;
+			background-color: #ddd;
+			position: absolute;
+			top: 0;
+			left: 0;
+			font-weight: bold;
+			font-size: .75em;
+			padding: .25em;
+			line-height: 1;
+		}
+	}
 }
 
 b {
-  font-weight: 600;
+	font-weight: 600;
 }
 
 code {
-  font-family: 'Source Code Pro', sans-serif;
-  letter-spacing: -.05em;
-  font-size: .95em;
-  color: #888;
+	font-family: 'Source Code Pro', sans-serif;
+	letter-spacing: -.05em;
+	font-size: .95em;
+	color: #888;
 }
 
 svg {
-  fill: currentColor;
+	fill: currentColor;
 }
 
 a {
-  color: inherit;
+	color: inherit;
 }
 
 header {
-  display: flex;
-  align-items: flex-end;
-  font-size: 1.6rem;
-  line-height: 1;
-  @include container;
+	display: flex;
+	align-items: flex-end;
+	font-size: 1.6rem;
+	line-height: 1;
+	@include container;
 
-  .share {
-    display: flex;
-    align-items: flex-end;
-    margin-left: auto;
-    font-size: .9em;
+	.share {
+		display: flex;
+		align-items: flex-end;
+		margin-left: auto;
+		font-size: .9em;
 
-    a {
-      display: flex;
+		a {
+			display: flex;
 
-      &:hover {
-        color: $color-rss;
-      }
+			&:hover {
+				color: $color-rss;
+			}
 
-      &[href*='twitter'] {
-        &:hover {
-          color: $color-twitter
-        }
-      }
+			&[href*='twitter'] {
+				&:hover {
+					color: $color-twitter
+				}
+			}
 
-      &:not(:first-child) {
-        margin-left: .25em;
-      }
-    }
-  }
+			&:not(:first-child) {
+				margin-left: .25em;
+			}
+		}
+	}
 }
 
 hr {
-  border: 0;
-  height: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+	border: 0;
+	height: 0;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .logo {
-  text-transform: uppercase;
-  letter-spacing: -.05em;
-  font-weight: 200;
-  font-family: 'Source Sans Pro', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: -.05em;
+	font-weight: 200;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 a.logo {
-  text-decoration: none;
+	text-decoration: none;
 
-  &:hover {
-    text-decoration: underline;
-  }
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 .logo b {
-  font-weight: 900;
-  font-size: 1.05em;
-  margin-right: .05em;
+	font-weight: 900;
+	font-size: 1.05em;
+	margin-right: .05em;
 }
 
 @mixin vertical-rhythm($space: $vertical-rhythm) {
-  * + * {
-    margin-top: $space;
-  }
+	* + * {
+		margin-top: $space;
+	}
 }
 
 .blog-post {
-  main {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+	main {
+		padding-top: 1.5rem;
+		padding-bottom: 1.5rem;
 
-    li {
-      + li,
-      li {
-        margin-top: $vertical-rhythm / 2;
-      }
-    }
+		li {
+			+ li,
+			li {
+				margin-top: $vertical-rhythm / 2;
+			}
+		}
 
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 800;
-    }
+		h1, h2, h3, h4, h5, h6 {
+			font-weight: 800;
+		}
 
-    time + h1 {
-      margin-top: .25rem;
-    }
-  }
+		time + h1 {
+			margin-top: .25rem;
+		}
+	}
 }
 
 main {
-  background: #f5f5f5;
-  @include container();
-  @include vertical-rhythm();
-  flex-grow: 1;
+	background: #f5f5f5;
+	@include container();
+	@include vertical-rhythm();
+	flex-grow: 1;
 
-  hr {
-    margin-top: 1.5rem;
-  }
+	hr {
+		margin-top: 1.5rem;
+	}
 }
 
 time {
-  & + h1 {
-    //margin-top: 0;
-  }
+	& + h1 {
+		//margin-top: 0;
+	}
 }
 
 .browser-logo {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 
-  svg {
-    margin-right: .2em;
-  }
+	svg {
+		margin-right: .2em;
+	}
 }
 
 .codepen-embed.prefill .cp_embed_wrapper {
-  overflow-y: hidden;
+	overflow-y: hidden;
 }
 
 .codepen-embed.prefill .cp_embed_wrapper > * {
-  margin-top: -50px;
-  margin-bottom: -30px;
+	margin-top: -50px;
+	margin-bottom: -30px;
 }
 
 img[src*='browser-logos'] {
-  vertical-align: sub;
-  margin-right: .2em;
+	vertical-align: sub;
+	margin-right: .2em;
 }
 
 figcaption {
-  margin-top: 0;
-  color: #666;
-  font-size: 85%;
-  line-height: 1.4;
+	margin-top: 0;
+	color: #666;
+	font-size: 85%;
+	line-height: 1.4;
 }
 
 ol {
-  counter-reset: ol-counter;
-  list-style-type: none;
-  padding-left: 1.5rem;
+	counter-reset: ol-counter;
+	list-style-type: none;
+	padding-left: 1.5rem;
 
-  li {
-    counter-increment: ol-counter;
+	li {
+		counter-increment: ol-counter;
 
-    &:before {
-      content: counters(ol-counter, '.')' ';
-      font-weight: 600;
-    }
-  }
+		&:before {
+			content: counters(ol-counter, '.') ' ';
+			font-weight: 600;
+		}
+	}
 }
 
 ul {
-  padding-left: 2.5rem;
+	padding-left: 2.5rem;
 
-  li {
+	li {
 
-  }
+	}
 }
 
 footer {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: .75em;
-  opacity: .5;
-  @include container();
-  text-align: center;
+	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+	font-size: .75em;
+	opacity: .5;
+	@include container();
+	text-align: center;
 }
 
-html.blog-index {}
+html.blog-index {
+}
 
 .blog-items {
-  padding-left: 0;
+	padding-left: 0;
 }
 
 .blog-item {
-  list-style-type: none;
-  font-size: 1.25rem;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+	list-style-type: none;
+	font-size: 1.25rem;
+	margin-top: 3rem;
+	margin-bottom: 3rem;
 }
 
 .blog-item-link {
-  text-decoration: none;
-  text-align: center;
+	text-decoration: none;
+	text-align: center;
 
-  &:hover {
-    .blog-item-title {
-      text-decoration: underline;
-    }
-  }
+	&:hover {
+		.blog-item-title {
+			text-decoration: underline;
+		}
+	}
 
-  > * + * {
-    margin-top: .25rem;
-  }
+	> * + * {
+		margin-top: .25rem;
+	}
 }
 
 .blog-item-icon {
-  background-color: #fff;
-  display: block;
-  width: 2rem;
-  height: 2rem;
-  padding: .5rem;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: .75rem;
+	background-color: #fff;
+	display: block;
+	width: 2rem;
+	height: 2rem;
+	padding: .5rem;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: .75rem;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .blog-item-date {
-  opacity: .5;
-  font-size: .6em;
-  display: block;
+	opacity: .5;
+	font-size: .6em;
+	display: block;
 }
 
 .blog-item-topic {
-  opacity: .5;
-  font-size: .6em;
+	opacity: .5;
+	font-size: .6em;
 }
 
 .blog-item-title {
-  font-weight: 800;
+	font-weight: 800;
 }
 
 .blog-item-text {
-  font-size: .75em;
+	font-size: .75em;
 }
