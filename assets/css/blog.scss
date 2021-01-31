@@ -339,3 +339,16 @@ html.blog-index {
 .blog-item-text {
 	font-size: .75em;
 }
+
+.more-articles {
+	box-shadow: 0 0 0 1px;
+	font-weight: bold;
+	text-decoration: none;
+	padding: .5em 1em;
+	background-color: #fff;
+	display: inline-block;
+
+	&:hover {
+		box-shadow: 0 0 0 2px;
+	}
+}
