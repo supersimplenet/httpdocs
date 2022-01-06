@@ -1,199 +1,137 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-    <channel>
-        <title>super-simple.net blog</title>
-        <link>https://super-simple.net/blog</link>
-        <description>web front-end development: html, css, js ...</description>
-        <image>
-            <title>super-simple.net blog</title>
-            <url>https://pbs.twimg.com/profile_images/1121464463415291907/v-xiWeLi_400x400.png</url>
-            <link>https://super-simple.net/blog</link>
-        </image>
-        <item>
-            <title>fieldset no puede ser flexbox container</title>
-            <link>https://super-simple.net/blog/fieldset-no-puede-ser-flexbox-container/</link>
-            <description>Recientemente, me he encontrado intentando maquetar un formulario con dos input, que: Deben tener una anchura mínima (en este caso 120 píxeles). Si es posible, ambos deberán ir en la misma línea. Si no, irá cada uno en una línea propia. En todo caso deberán crecer para ocupar todo el espacio horizontal disponibile.</description>
-            <content:encoded><![CDATA[<p>Recientemente, me he encontrado intentando maquetar un formulario con dos <code>input</code>, que:</p>
-
-	<ol>
-		<li>Deben tener una anchura mínima (en este caso 120 píxeles).</li>
-		<li>Si es posible, ambos deberán ir en la misma línea. Si no, irá cada uno en una línea propia.</li>
-		<li>En todo caso deberán crecer para ocupar todo el espacio horizontal disponibile.</li>
-	</ol>
-
-	<p>Un caso sencillo, usando <code>flex-wrap</code> y <code>flex-grow</code>, ¿verdad?:</p>
-
-	<p>Sin embargo, verás que la demo no funciona como se espera, si la ves desde uno de estos navegadores:</p>
-
-	<ul>
-		<li><img src="/assets/img/browser-logos/chrome.svg"> <b>Chrome</b></li>
-		<li><img src="/assets/img/browser-logos/edge.svg"> <b>Edge</b></li>
-		<li><img src="/assets/img/browser-logos/samsung.svg"> <b>Samsung Internet</b></li>
-		<li><img src="/assets/img/browser-logos/uc.svg"> <b>UC Browser</b></li>
-	</ul>
-
-	<div class="codepen" data-prefill data-default-tab="result,css" data-height="280">
-<pre data-lang="html">
-&lt;fieldset>
-	&lt;input type="text">
-	&lt;input type="text">
-&lt;/fieldset>
-</pre>
-		<pre data-lang="less">
-fieldset {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-input {
-	width: 120px;
-	flex-grow: 1;
-}
-</pre>
-	</div>
-
-	<p>Desgraciadamente, hay ciertos elementos, entre ellos <code>fieldset</code>, en los que <code>display:flex</code> no se aplica correctamente.</p>
-
-	<p><b>Solución:</b> tan simple como añadir un elemento extra, que utilizaremos como contenedor <i>flexbox:</i></p>
-
-	<div class="codepen" data-prefill data-default-tab="result,css" data-height="300">
-<pre data-lang="html">
-&lt;fieldset>
-	&lt;div class="input-group">
-		&lt;input type="text">
-		&lt;input type="text">
-	&lt;/div>
-&lt;/fieldset>
-</pre>
-<pre data-lang="less">
-fieldset {}
-
-.input-group {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-input {
-	width: 120px;
-	flex-grow: 1;
-}
-</pre>
-	</div>
-
-	<p><a href="/blog/">+ VER MÁS ARTÍCULOS</a></p>]]></content:encoded>
-        </item>
-        <item>
-            <title>Cross-browser flexbox input add-ons</title>
-            <link>https://super-simple.net/blog/cross-browser-flexbox-input-add-ons/</link>
-            <description>Basado en Solvey by Flexbox: Input Add-ons, dando soporte a un mayor número de los navegadores más usados, según caniuse.com</description>
-            <content:encoded><![CDATA[<p>Basado en <a href="https://philipwalton.github.io/solved-by-flexbox/demos/input-add-ons/">Solvey by Flexbox: Input Add-ons</a>, dando soporte a un mayor número de los navegadores más usados, según <a href="http://caniuse.com/#feat=flexbox">caniuse.com</a></p>
-
-  <img src="img/caniuse.png" alt="">
-
-	<p>Dado el marcado:</p>
-
-	<div class="codepen" data-prefill data-default-tab="html" data-height="200">
-		<pre data-lang="html">
-&lt;div class="InputAddOn"&gt;
-  &lt;button&gt;-&lt;/button&gt;
-  &lt;input class="InputAddOn-field" type="number" value="1"&gt;
-  &lt;button&gt;+&lt;/button&gt;
-&lt;/div&gt;</pre>
-	</div>
-
-  <p>Aplicamos las variantes de <code>display:flex</code> con los prefijos de navegadores correspondientes:</p>
-
-	<p>
-		Además, como <b>UC Browser</b> y <b>Android Browser <=4.3</b> no lo aplican correctamente a elementos <code>inline</code>, aplicamos <code>display:block</code>
-	</p>
-
-	<div class="codepen" data-prefill data-default-tab="css,result" data-height="410">
-		<pre data-lang="html">
-&lt;div class="InputAddOn"&gt;
-  &lt;button&gt;-&lt;/button&gt;
-  &lt;input class="InputAddOn-field" type="number" value="1"&gt;
-  &lt;button&gt;+&lt;/button&gt;
-&lt;/div&gt;</pre>
-		<pre data-lang="less">
-.InputAddOn {
-	display: block;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.InputAddOn-field {
-	display: block;
-	-webkit-box-flex: 1;
-	-moz-box-flex: 1;
-	-webkit-flex: 1;
-	-ms-flex: 1;
-	flex: 1;
-}</pre>
-	</div>
-
-	<h2 class="browser-logo">
-		<img src="/assets/img/browser-logos/internet-explorer.svg">
-		Internet Explorer 8 y 9
-	</h2>
-
-  <p>Estos navegadores no soportan <code>display:flexbox</code>, pero podemos hacer uso de <code>display:table</code> y <code>display:table-cell</code> para obtener un resultado similar. Hacemos uso de <a href="https://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">comentarios condicionales</a>.</p>
-
-	<div class="codepen" data-prefill data-default-tab="html,css" data-height="330">
-<pre data-lang="html">
-&lt;!--[if IE 8 ]&gt;&lt;html class="ie8 lte-ie9 lte-ie8"&gt;&lt;![endif]--&gt;
-&lt;!--[if IE 9 ]&gt;&lt;html class="ie9 lte-ie9"&gt;&lt;![endif]--></pre>
-<pre data-lang="css">
-.lte-ie9 .InputAddOn {
-    display: table;
-    width: 100%;
-}
-
-.lte-ie9 .InputAddOn > * {
-    display: table-cell;
-}
-
-.lte-ie9 .InputAddOn-field {
-    width: 100%;
-}</pre>
-	</div>
-
-	<p>Probado en:</p>
-
-	<ul>
-		<li>
-			<img src="/assets/img/browser-logos/internet-explorer.svg" alt="">
-			<b>Internet Explorer 8, 9, 10, 11</b>
-		</li>
-		<li>
-			<img src="/assets/img/browser-logos/edge.svg" alt="">
-			<b>Edge</b>
-		</li>
-		<li>
-			<img src="/assets/img/browser-logos/firefox.svg" alt="">
-			<b>Firefox</b>
-		</li>
-		<li>
-			<img src="/assets/img/browser-logos/chrome.svg" alt="">
-			<b>Chrome</b>
-		</li>
-		<li>
-			<img src="/assets/img/browser-logos/safari.svg" alt="">
-			<b>Safari</b>
-		</li>
-		<li>
-			<img src="/assets/img/browser-logos/opera.svg" alt="">
-			<b>Opera</b>
-		</li>
-		<li>
-			<img src="/assets/img/browser-logos/uc.svg" alt="">
-			<b>UC browser</b>
-		</li>
-	</ul>
-
-	<p><a href="/blog/">+ VER MÁS ARTÍCULOS</a></p>]]></content:encoded>
-        </item>
-    </channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<atom:link href="https://super-simple.net/blog/feed.xml" rel="self" type="application/rss+xml"/>
+		<title>super-simple.net blog</title>
+		<link>https://super-simple.net/blog</link>
+		<description>web front-end development: html, css, js ...</description>
+		<image>
+			<title>super-simple.net blog</title>
+			<url>https://pbs.twimg.com/profile_images/1121464463415291907/v-xiWeLi_400x400.png</url>
+			<link>https://super-simple.net/blog</link>
+		</image>
+		<item>
+			<title>JavaScript Responsable: Parte III</title>
+			<link>https://medium.com/a-list-apart-en-espa%C3%B1ol/javascript-responsable-parte-iii-b3d73a7e993f</link>
+			<guid>https://medium.com/a-list-apart-en-espa%C3%B1ol/javascript-responsable-parte-iii-b3d73a7e993f</guid>
+			<pubDate>Mon, 06 Sep 2021 00:00:00 +0100</pubDate>
+			<description>Traducción para A List Apart en español</description>
+		</item>
+		<item>
+			<title>Aligning characters with font variants</title>
+			<link>https://codepen.io/supersimplenet/pen/GRjaNbY</link>
+			<guid>https://codepen.io/supersimplenet/pen/GRjaNbY</guid>
+			<pubDate>Fri, 22 Jan 2021 00:00:00 +0100</pubDate>
+			<description>Codepen demo</description>
+		</item>
+		<item>
+			<title>Faking grid areas using :after &amp; :before</title>
+			<link>https://codepen.io/supersimplenet/pen/zYKLdGR</link>
+			<guid>https://codepen.io/supersimplenet/pen/zYKLdGR</guid>
+			<pubDate>Sun, 10 Jan 2021 00:00:00 +0100</pubDate>
+			<description>Codepen demo</description>
+		</item>
+		<item>
+			<title>JavaScript Responsable: Parte II</title>
+			<link>https://medium.com/a-list-apart-en-espa%C3%B1ol/javascript-responsable-parte-ii-dc13671c0245</link>
+			<guid>https://medium.com/a-list-apart-en-espa%C3%B1ol/javascript-responsable-parte-ii-dc13671c0245</guid>
+			<pubDate>Tue, 13 Oct 2020 00:00:00 +0100</pubDate>
+			<description>Traducción para A List Apart en español</description>
+		</item>
+		<item>
+			<title>CSS aritmético: exprimiendo calc()</title>
+			<link>https://octuweb.com/css-aritmetico-exprimiendo-calc/</link>
+			<guid>https://octuweb.com/css-aritmetico-exprimiendo-calc/</guid>
+			<pubDate>Thu, 01 Oct 2020 00:00:00 +0100</pubDate>
+			<description>Artículo en Octuweb</description>
+		</item>
+		<item>
+			<title>Cross-browser select Sass mixin</title>
+			<link>https://www.super-simple.net/blog/cross-browser-select-sass-mixin/</link>
+			<guid>https://www.super-simple.net/blog/cross-browser-select-sass-mixin/</guid>
+			<pubDate>Wed, 24 Jun 2020 00:00:00 +0100</pubDate>
+			<description>Codepen demo</description>
+		</item>
+		<item>
+			<title>Cross-browser line-clamp</title>
+			<link>https://www.super-simple.net/blog/cross-browser-line-clamp/</link>
+			<guid>https://www.super-simple.net/blog/cross-browser-line-clamp/</guid>
+			<pubDate>Thu, 04 Jun 2020 00:00:00 +0100</pubDate>
+			<description>Codepen demo</description>
+		</item>
+		<item>
+			<title>Coloring paths on external svg sprites</title>
+			<link>https://www.super-simple.net/blog/coloring-paths-external-svg-sprites/</link>
+			<guid>https://www.super-simple.net/blog/coloring-paths-external-svg-sprites/</guid>
+			<pubDate>Thu, 28 May 2020 00:00:00 +0100</pubDate>
+		</item>
+		<item>
+			<title>Width-independent corner ribbons</title>
+			<link>https://codepen.io/supersimplenet/pen/VwvEJyN</link>
+			<guid>https://codepen.io/supersimplenet/pen/VwvEJyN</guid>
+			<pubDate>Mon, 18 May 2020 00:00:00 +0100</pubDate>
+			<description>Codepen demo</description>
+		</item>
+		<item>
+			<title>Using calc to figure out optimal line-height</title>
+			<link>https://kittygiraudel.com/2020/05/18/using-calc-to-figure-out-optimal-line-height/</link>
+			<guid>https://kittygiraudel.com/2020/05/18/using-calc-to-figure-out-optimal-line-height/</guid>
+			<pubDate>Mon, 18 May 2020 00:00:00 +0100</pubDate>
+			<description>Guest post on kittygiraudel.com</description>
+		</item>
+		<item>
+			<title>Un CSS Reset moderno</title>
+			<link>https://www.super-simple.net/blog/un-css-reset-moderno</link>
+			<guid>https://www.super-simple.net/blog/un-css-reset-moderno</guid>
+			<pubDate>Mon, 13 Apr 2020 00:00:00 +0100</pubDate>
+			<description>Traducción de "A Modern CSS Reset", por Andy Bell</description>
+		</item>
+		<item>
+			<title>Progressive enhancement: drop-down</title>
+			<link>https://codepen.io/supersimplenet/pen/VwLmbYE</link>
+			<guid>https://codepen.io/supersimplenet/pen/VwLmbYE</guid>
+			<pubDate>Sun, 29 Mar 2020 00:00:00 +0100</pubDate>
+			<description>Codepen demo</description>
+		</item>
+		<item>
+			<title>JavaScript Responsable: Parte I</title>
+			<link>https://medium.com/a-list-apart-en-espa%C3%B1ol/javascript-responsable-parte-i-5676f29d4463</link>
+			<guid>https://medium.com/a-list-apart-en-espa%C3%B1ol/javascript-responsable-parte-i-5676f29d4463</guid>
+			<pubDate>Wed, 11 Mar 2020 00:00:00 +0100</pubDate>
+			<description>Traducción para A List Apart en español</description>
+		</item>
+		<item>
+			<title>Using border-spacing to fake vertical margin between table rows</title>
+			<link>https://codepen.io/supersimplenet/pen/OJVNxPb</link>
+			<guid>https://codepen.io/supersimplenet/pen/OJVNxPb</guid>
+			<pubDate>Sun, 16 Feb 2020 00:00:00 +0100</pubDate>
+			<description>Codepen demo</description>
+		</item>
+		<item>
+			<title>Faking onSticky event with Intersection Observer</title>
+			<link>https://codepen.io/supersimplenet/pen/BayvWRJ</link>
+			<guid>https://codepen.io/supersimplenet/pen/BayvWRJ</guid>
+			<pubDate>Fri, 07 Feb 2020 00:00:00 +0100</pubDate>
+			<description>Codepen demo</description>
+		</item>
+		<item>
+			<title>Pinta el cuadro, no el marco</title>
+			<link>https://medium.com/a-list-apart-en-espa%C3%B1ol/pinta-el-cuadro-no-el-marco-c%C3%B3mo-los-navegadores-proporcionan-todo-lo-que-los-usuarios-necesitan-afe1f046d434</link>
+			<guid>https://medium.com/a-list-apart-en-espa%C3%B1ol/pinta-el-cuadro-no-el-marco-c%C3%B3mo-los-navegadores-proporcionan-todo-lo-que-los-usuarios-necesitan-afe1f046d434</guid>
+			<pubDate>Wed, 31 Jul 2019 00:00:00 +0100</pubDate>
+			<description>Traducción para A List Apart en español</description>
+		</item>
+		<item>
+			<title>fieldset no puede ser flexbox container</title>
+			<link>https://super-simple.net/blog/fieldset-no-puede-ser-flexbox-container/</link>
+			<guid>https://super-simple.net/blog/fieldset-no-puede-ser-flexbox-container/</guid>
+			<pubDate>Sat, 18 May 2019 00:00:00 +0100</pubDate>
+		</item>
+		<item>
+			<title>Cross-browser flexbox input add-ons</title>
+			<link>https://super-simple.net/blog/cross-browser-flexbox-input-add-ons/</link>
+			<guid>https://super-simple.net/blog/cross-browser-flexbox-input-add-ons/</guid>
+			<pubDate>Sat, 29 Jul 2017 00:00:00 +0100</pubDate>
+		</item>
+	</channel>
 </rss>
