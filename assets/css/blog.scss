@@ -19,6 +19,7 @@ $vertical-rhythm: 1rem;
 
 * {
 	margin: 0;
+	box-sizing: border-box;
 }
 
 html {
@@ -340,15 +341,47 @@ html.blog-index {
 	font-size: .75em;
 }
 
-.more-articles {
-	box-shadow: 0 0 0 1px;
-	font-weight: bold;
-	text-decoration: none;
-	padding: .5em 1em;
-	background-color: #fff;
-	display: inline-block;
+nav.after-post {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 1rem;
 
-	&:hover {
-		box-shadow: 0 0 0 2px;
+	> * {
+		flex-grow: 1;
+		margin-top: 0;
+	}
+
+	a {
+		box-shadow: 0 0 0 1px;
+		font-weight: bold;
+		text-decoration: none;
+		padding: .5em 1em;
+		background-color: #fff;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		&[href*='twitter'] {
+			&:hover {
+				color: $color-twitter;
+			}
+		}
+
+		&[href*='feed.xml'] {
+			&:hover {
+				color: $color-rss;
+			}
+		}
+
+		&:hover {
+			box-shadow: 0 0 0 2px;
+		}
+
+		svg {
+			margin-right: .25em;
+			font-size: 1em;
+		}
 	}
 }
+
